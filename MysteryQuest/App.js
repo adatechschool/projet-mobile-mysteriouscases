@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StatusBar } from "expo-status-bar";
+import { NativeRouter, Route, Link, Routes } from "react-router-native";
+import Home from "./Home";
+import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import Test from "./Test";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NativeRouter>
+      <SafeAreaView style={styles.container}>
+        <View>
+          {/* Header */}
+          <Link to="/home">
+            <Text>Home</Text>
+          </Link>
+          <Link to="/test">
+            <Text>Test</Text>
+          </Link>
+        </View>
+        <View style={styles.content}>
+          {/* Routes */}
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/test" element={<Test />} />
+          </Routes>
+        </View>
+      </SafeAreaView>
+    </NativeRouter>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "dodgerblue",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  content: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
