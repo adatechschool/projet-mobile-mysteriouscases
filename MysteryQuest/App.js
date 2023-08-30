@@ -1,14 +1,18 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { NativeRouter, Route, Link, Routes } from "react-router-native";
-import Home from "./Home";
+import Home from "./pages/Home";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Test from "./Test";
+import Test from "./pages/Test";
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function App() {
   return (
     <NativeRouter>
-      <SafeAreaView style={styles.container}>
+      <LinearGradient 
+        colors={['#0c0a09', '#4338ca']} 
+        style={{height:'100%', justifyContent:'center'}} 
+      >
         <View>
           {/* Header */}
           <Link to="/home">
@@ -25,7 +29,7 @@ export default function App() {
             <Route path="/test" element={<Test />} />
           </Routes>
         </View>
-      </SafeAreaView>
+      </LinearGradient>
     </NativeRouter>
   );
 }
@@ -33,7 +37,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "dodgerblue",
+    // backgroundColor:'transparent',
+    // background: 'linear-gradient(45deg, #FF0000, #00FF00)',
     alignItems: "center",
     justifyContent: "center",
   },
