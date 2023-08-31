@@ -16,6 +16,7 @@ import QuestSuccessPage from "./pages/QuestSuccessPage";
 import RankingPage from "./pages/RankingPage";
 import RulesPage from "./pages/RulesPage";
 import TrophyPage from "./pages/TrophyPage";
+import Menu from "./components/Menu";
 
 export default function App() {
 
@@ -46,6 +47,7 @@ export default function App() {
           <Route path="/RankingPage" element={<RankingPage/>} />
           <Route path="/RulesPage" element={<RulesPage/>} />
           <Route path="/TrophyPage" element={<TrophyPage/>} />
+          <Route path="/Menu" element={<Menu/>} />
         </Routes>
       </LinearGradient>
     </NativeRouter>

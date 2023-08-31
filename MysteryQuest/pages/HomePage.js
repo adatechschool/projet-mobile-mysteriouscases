@@ -8,10 +8,12 @@ import {
   StyleSheet,
   Button,
 } from "react-native";
+import Navbar from "../components/Navbar";
 
 const HomePage = () => {
   return (
     <SafeAreaView>
+      <Navbar/>
       <Text style={styles.title}>Quêtes disponibles : </Text>
       <FlatList
         data={[

@@ -1,10 +1,11 @@
 import { View, Text, Button, StyleSheet, Pressable } from "react-native";
 import { useNavigate } from "react-router-native";
+import Navbar from "../components/Navbar";
 
 const LandingPage = () => {
   const navigate = useNavigate(); // Obtenir la fonction de navigation
-  const goToHomePage = () => {
-    navigate("/HomePage"); // Naviguer vers la route HomePage
+  const goToHomePage = () => { // Naviguer vers la route HomePage
+    navigate("/HomePage");
   };
 
   return (
