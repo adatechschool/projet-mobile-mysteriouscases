@@ -1,6 +1,6 @@
 
-import { View, Text, Button,StyleSheet } from 'react-native';
-import {Link, useNavigate } from "react-router-native";
+import { View, Text, Button, StyleSheet } from 'react-native';
+import {useNavigate } from "react-router-native";
 
 
 

@@ -20,9 +20,12 @@ import {useFonts} from 'expo-font';
 export default function App() {
 
   const [fontsLoaded] = useFonts({
-    'Mystery' : require('./assets/fonts/MysteryQuest-Regular.ttf'),
+    'Mystery': require('./assets/fonts/MysteryQuest-Regular.ttf'),
     'Baskerville': require('./assets/fonts/LibreBaskerville-Regular.ttf')
-  })
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <NativeRouter>
