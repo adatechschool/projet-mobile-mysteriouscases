@@ -1,9 +1,15 @@
 import { View, Text } from "react-native";
 
+const styles = StyleSheet.create({
+  text: {
+    fontFamily: 'MysteryQuest Regular'
+  }
+})
+
 function Home() {
   return (
     <View>
-      <Text>hellooo</Text>
+      <Text style={styles.text}>hellooo</Text>
     </View>
   );
 }
