@@ -5,6 +5,16 @@ import Home from "./pages/Home";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import Test from "./pages/Test";
 import { LinearGradient } from 'expo-linear-gradient';
+import HomePage from "./pages/HomePage";
+import LandingPage from "./pages/LandingPage";
+import ProfilePage from "./pages/ProfilePage";
+import QuestRewardingPage from "./pages/QuestRewardingPage";
+import QuestStartPage from "./pages/QuestStartPage";
+import QuestStepPage from "./pages/QuestStepPage";
+import QuestSuccessPage from "./pages/QuestSuccessPage";
+import RankingPage from "./pages/RankingPage";
+import RulesPage from "./pages/RulesPage";
+import TrophyPage from "./pages/TrophyPage";
 
 export default function App() {
   return (
@@ -27,6 +37,16 @@ export default function App() {
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/test" element={<Test />} />
+            <Route path="/HomePage" element={<HomePage/>} />
+            <Route path="/LandingPage" element={<LandingPage/>} />
+            <Route path="/ProfilePage" element={<ProfilePage/>} />
+            <Route path="/QuestRewardingPage" element={<QuestRewardingPage/>} />
+            <Route path="/QuestStartPage" element={<QuestStartPage/>} />
+            <Route path="/QuestStepPage" element={<QuestStepPage/>} />
+            <Route path="/QuestSuccessPage" element={<QuestSuccessPage/>} />
+            <Route path="/RankingPage" element={<RankingPage/>} />
+            <Route path="/RulesPage" element={<RulesPage/>} />
+            <Route path="/TrophyPage" element={<TrophyPage/>} />
           </Routes>
         </View>
       </LinearGradient>
