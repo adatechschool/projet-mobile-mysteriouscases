@@ -27,10 +27,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   button: {
-    backgroundColor: "#EAB308",
+    alignItems: 'center',
+    paddingVertical: 12,
+    marginHorizontal: 130,
+    borderRadius: 15,
+    backgroundColor: '#EAB308',
     fontFamily: "Mystery",
-    color: "500724",
-    textAlign: 'center'
 
   },
 });
