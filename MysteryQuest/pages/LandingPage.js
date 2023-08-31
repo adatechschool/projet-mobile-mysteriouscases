@@ -27,6 +27,7 @@ const LandingPage = () => {
 const styles = StyleSheet.create({
     text:{
         color: '#EAB308',
+        fontFamily: 'Mystery'
         
     },
     

@@ -15,8 +15,15 @@ import QuestSuccessPage from "./pages/QuestSuccessPage";
 import RankingPage from "./pages/RankingPage";
 import RulesPage from "./pages/RulesPage";
 import TrophyPage from "./pages/TrophyPage";
+import {useFonts} from 'expo-font';
 
 export default function App() {
+
+  const [fontsLoaded] = useFonts({
+    'Mystery' : require('./assets/fonts/MysteryQuest-Regular.ttf'),
+    'Baskerville': require('./assets/fonts/LibreBaskerville-Regular.ttf')
+  })
+
   return (
     <NativeRouter>
       <LinearGradient 
@@ -41,3 +48,5 @@ export default function App() {
     </NativeRouter>
   );
 }
+
+
