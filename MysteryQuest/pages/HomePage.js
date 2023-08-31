@@ -1,10 +1,11 @@
-import React from 'react';
+import { View, Text } from "react-native";
+
 
 const HomePage = () => {
     return (
-        <div>
-            
-        </div>
+        <View>
+            <Text>Voici la HomePage</Text>
+        </View>
     );
 };
 

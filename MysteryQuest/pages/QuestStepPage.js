@@ -1,10 +1,8 @@
-import React from 'react';
+import { View } from "react-native";
 
 const QuestStepPage = () => {
     return (
-        <div>
-            
-        </div>
+        <View></View>
     );
 };
 
