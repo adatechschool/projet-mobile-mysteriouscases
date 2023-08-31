@@ -1,37 +1,38 @@
-
-import { View, Text, Button, StyleSheet } from 'react-native';
-import {useNavigate } from "react-router-native";
-
-
-
+import { View, Text, Button, StyleSheet, Pressable } from "react-native";
+import { useNavigate } from "react-router-native";
 
 const LandingPage = () => {
+  const navigate = useNavigate(); // Obtenir la fonction de navigation
+  const goToHomePage = () => {
+    navigate("/HomePage"); // Naviguer vers la route HomePage
+  };
 
-    const navigate = useNavigate(); // Obtenir la fonction de navigation
-        
-    const goToHomePage = () => {
-        navigate('/HomePage'); // Naviguer vers la route HomePage
-    };
-
-    return (
-        <View>
-            <Text style={styles.text}>Mystery Quest</Text>
-            <Button
-                title='Jouer'
-                onPress={goToHomePage}>
-            </Button>
-        </View>
-    );
+  return (
+    <View>
+      <Text style={styles.title}>Mystery Quest</Text>
+      <Pressable style={styles.button} onPress={goToHomePage}>
+        <Text>Jouer</Text>
+      </Pressable>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-    text:{
-        color: '#EAB308',
-        fontFamily: 'Mystery'
-        
-    },
-    
+  title: {
+    color: "#EAB308",
+    fontFamily: "Mystery",
+    fontSize: 60,
+    textAlign: "center",
+    paddingVertical: 40,
+    paddingHorizontal: 40,
+  },
+  button: {
+    backgroundColor: "#EAB308",
+    fontFamily: "Mystery",
+    color: "500724",
+    textAlign: 'center'
 
-})
+  },
+});
 
 export default LandingPage;

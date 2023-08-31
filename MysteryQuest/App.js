@@ -1,10 +1,11 @@
 import React from "react";
-import { StatusBar } from "expo-status-bar";
 import { NativeRouter, Route, Link, Routes } from "react-router-native";
-import Home from "./pages/Home";
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import Test from "./pages/Test";
 import { LinearGradient } from 'expo-linear-gradient';
+import {useFonts} from 'expo-font';
+
+import Home from "./pages/Home";
+import Test from "./pages/Test";
 import HomePage from "./pages/HomePage";
 import LandingPage from "./pages/LandingPage";
 import ProfilePage from "./pages/ProfilePage";
@@ -15,7 +16,6 @@ import QuestSuccessPage from "./pages/QuestSuccessPage";
 import RankingPage from "./pages/RankingPage";
 import RulesPage from "./pages/RulesPage";
 import TrophyPage from "./pages/TrophyPage";
-import {useFonts} from 'expo-font';
 
 export default function App() {
 
