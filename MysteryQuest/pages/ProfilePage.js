@@ -1,9 +1,11 @@
 import { View } from "react-native";
-
+import Navbar from "../components/Navbar";
 const ProfilePage = () => {
-    return (
-        <View></View>
-    );
+  return (
+    <View>
+      <Navbar />
+    </View>
+  );
 };
 
 export default ProfilePage;

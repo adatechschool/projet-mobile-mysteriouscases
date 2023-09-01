@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     marginBottom: 20, // Ajoutez un espacement entre chaque quête
   },
   blurryBackground: {
-    backgroundColor: "rgba(128, 128, 128, 0.3)", // Opacité appliquée ici
+    backgroundColor: "rgba(0, 0, 0, 0.3)", // Opacité appliquée ici
     borderRadius: 25, // Appliquez la bordure au fond flou
     padding: 10, // Ajoutez un espacement autour du fond flou
   },
