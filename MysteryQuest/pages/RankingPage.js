@@ -146,6 +146,11 @@ const RankingPage = () => {
 
     </SafeAreaView>
   );
+  return (
+    <View>
+      <Navbar />
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -211,3 +216,4 @@ const styles = StyleSheet.create({
 });
 
 export default RankingPage;
+
