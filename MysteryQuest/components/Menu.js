@@ -9,29 +9,13 @@ const Menu = () => {
 
   // If faudra faire le routes pour les autres onglet du menu quand on les aura crée
 
-  const [menu, setMenu] = useState(true); // on false the menu is ON lol
+  const [menu, setMenu] = useState(false);
 
   const toggleMenu = () => {
     setMenu((prevMenu) => !prevMenu);
     console.log(menu);
   };
 
-  const cross = (
-    <Svg
-      style={styles.cross}
-      width="15"
-      height="15"
-      viewBox="0 0 23 23"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <Path
-        d="M2.275 22.75L0 20.475L9.1 11.375L0 2.275L2.275 0L11.375 9.1L20.475 0L22.75 2.275L13.65 11.375L22.75 20.475L20.475 22.75L11.375 13.65L2.275 22.75Z"
-        fill="#EAB308"
-        fill-opacity="0.74"
-      />
-    </Svg>
-  );
   const hamburger = (
     <Svg width={24} height={24} viewBox="0 0 448 512">
       <G fill="#eab308">
@@ -43,29 +27,8 @@ const Menu = () => {
   return (
     <View>
       <TouchableOpacity onPress={toggleMenu}>
-        {menu ? cross : hamburger}
+        {menu ? navigate("/SettingPage") : hamburger}
       </TouchableOpacity>
-      <View style={menu ? styles.menuOpen : null}>
-        {menu && (
-          <View style={styles.container}>
-            <TouchableOpacity>
-              <Text style={styles.container}onPress={() => navigate("/HomePage")}>Accueil</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.container} onPress={() => navigate("/RulesPage")}>Règles</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.container} onPress={() => navigate("/TrophyPage")}>Trophées</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.container} onPress={() => navigate("/RankingPage")}>Classement</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.container} onPress={() => navigate("/ProfilePage")}>Profil</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
     </View>
   );
 };
@@ -74,11 +37,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
     fontFamily: "Baskerville",
-    fontSize: 28
-
+    fontSize: 28,
   },
-  cross: {
-  },
+  cross: {},
   menuOpen: {
     top: 0, // Positionnez le menu en haut de son conteneur parent
     left: 0, // Positionnez le menu tout à gauche

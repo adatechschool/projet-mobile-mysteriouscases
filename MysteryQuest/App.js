@@ -17,6 +17,8 @@ import RankingPage from "./pages/RankingPage";
 import RulesPage from "./pages/RulesPage";
 import TrophyPage from "./pages/TrophyPage";
 import Menu from "./components/Menu";
+import Navbar from "./components/Navbar";
+import SettingPage from "./pages/SettingsPage";
 
 export default function App() {
 
@@ -48,6 +50,7 @@ export default function App() {
           <Route path="/RulesPage" element={<RulesPage/>} />
           <Route path="/TrophyPage" element={<TrophyPage/>} />
           <Route path="/Menu" element={<Menu/>} />
+          <Route path="/SettingPage" element={<SettingPage/>} />
         </Routes>
       </LinearGradient>
     </NativeRouter>
