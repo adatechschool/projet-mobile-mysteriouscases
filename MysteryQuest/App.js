@@ -20,6 +20,8 @@ import Menu from "./components/Menu";
 import Timer from "./components/Timer";
 import Connexion from "./components/Connexion";
 import Inscription from "./components/Inscription";
+import Navbar from "./components/Navbar";
+import SettingPage from "./pages/SettingsPage";
 
 export default function App() {
 
@@ -53,6 +55,7 @@ export default function App() {
           <Route path="/Menu" element={<Menu/>} />
           <Route path="/Connexion" element={<Connexion/>} />
           <Route path="/Inscription" element={<Inscription/>} />
+          <Route path="/SettingPage" element={<SettingPage/>} />
         </Routes>
       </LinearGradient>
     </NativeRouter>
