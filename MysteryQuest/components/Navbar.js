@@ -24,13 +24,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     left: -15,
-    top: 16
+    top: 0
   },
   container: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
+    
   },
 });
 export default Navbar;
