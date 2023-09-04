@@ -1,9 +1,14 @@
 import React from "react";
 import { NativeRouter, Route, Link, Routes } from "react-router-native";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
-import { LinearGradient } from 'expo-linear-gradient';
-import {useFonts} from 'expo-font';
-
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+} from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
 
 import Home from "./pages/Home";
 import Test from "./pages/Test";
@@ -26,8 +31,8 @@ import SettingPage from "./pages/SettingsPage";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    'Mystery': require('./assets/fonts/MysteryQuest-Regular.ttf'),
-    'Baskerville': require('./assets/fonts/LibreBaskerville-Regular.ttf')
+    Mystery: require("./assets/fonts/MysteryQuest-Regular.ttf"),
+    Baskerville: require("./assets/fonts/LibreBaskerville-Regular.ttf"),
   });
   if (!fontsLoaded) {
     return null;
