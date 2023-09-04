@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   Button,
+  SafeAreaView,
 } from "react-native";
 import Navbar from "../components/Navbar";
 import Svg, { G, Path } from "react-native-svg";
@@ -69,38 +70,76 @@ const ProfilePage = () => {
     </Svg>
   );
   return (
-    <View>
-      <Navbar />
-      <Text style={{ fontFamily: "Mystery" }}>Profil</Text>
-      <Image
-        style={styles.profilPic}
-        source={"https://reactnative.dev/img/tiny_logo.png"}
-      ></Image>
-      <TouchableOpacity style={styles.profilPicBg}>
-        <View style={styles.profilPicSvg}>{profilPic}</View>
-      </TouchableOpacity>
-      <Text style={{ fontFamily: "Baskerville" }}>
-        Nom d'utilisateur : {user}
-        <TouchableOpacity>{pen}</TouchableOpacity>
-      </Text>
-      <Text style={{ fontFamily: "Baskerville" }}>
-        Mot de passe: {password}
-        <TouchableOpacity>{pen}</TouchableOpacity>
-      </Text>
-      <TouchableOpacity>
-        <Text style={{ fontFamily: "Baskerville" }}>
-          Se déconnecter<TouchableOpacity>{logOut}</TouchableOpacity>
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity>
-        <Text style={{ fontFamily: "Baskerville" }}>
-          Supprimer le compte<TouchableOpacity>{supp}</TouchableOpacity>
-        </Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <SafeAreaView>
+        <Navbar />
+      </SafeAreaView>
+      <View style={styles.container}>
+        <Text style={{ fontFamily: "Mystery", fontSize: 35 }}>Profil</Text>
+        <View style={styles.profilPicContainer}>
+          <Image
+            style={styles.profilPic}
+            source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
+          />
+          <TouchableOpacity style={styles.profilPicBg}>
+            <View style={styles.profilPicSvg}>{profilPic}</View>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.line}>
+          <Text styles={styles.label}>Nom d'utilisateur : {user}</Text>
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>{pen}</TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.line}>
+          <Text style={styles.label}>Mot de passe: {password}</Text>
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>{pen}</TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.line}>
+          <Text style={styles.label}>Se déconnecter</Text>
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>{logOut}</TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.line}>
+          <Text style={styles.label}>Supprimer le compte</Text>
+          <View style={styles.iconContainer}>
+            <TouchableOpacity>{supp}</TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+    alignItems: "center",
+    padding: 50,
+    rowGap: 8,
+  },
+  label: {
+    flex: 1,
+    fontFamily: "Baskerville",
+  },
+  iconContainer: {
+    width: 25,
+    height: 25,
+    borderRadius: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 110,
+  },
+  line: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    fontFamily: "Baskerville",
+    alignItems: "center",
+    marginBottom: 10,
+  },
   profilPic: {
     backgroundColor: "white",
     width: 150,
@@ -112,6 +151,9 @@ const styles = StyleSheet.create({
     height: 25,
     borderRadius: 200,
     backgroundColor: "#EAB308",
+    position: "absolute",
+    bottom: 0,
+    right: 0,
   },
   profilPicSvg: {
     top: 3.5,
