@@ -23,6 +23,8 @@ const styles = StyleSheet.create({
     fontFamily: "Mystery",
     fontSize: 16,
     textAlign: "center",
+    left: -15,
+    top: 16
   },
   container: {
     display: "flex",

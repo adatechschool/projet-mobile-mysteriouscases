@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import {useFonts} from 'expo-font';
 
+
 import Home from "./pages/Home";
 import Test from "./pages/Test";
 import HomePage from "./pages/HomePage";
@@ -24,7 +25,6 @@ import Navbar from "./components/Navbar";
 import SettingPage from "./pages/SettingsPage";
 
 export default function App() {
-
   const [fontsLoaded] = useFonts({
     'Mystery': require('./assets/fonts/MysteryQuest-Regular.ttf'),
     'Baskerville': require('./assets/fonts/LibreBaskerville-Regular.ttf')
@@ -35,9 +35,9 @@ export default function App() {
 
   return (
     <NativeRouter>
-      <LinearGradient 
-        colors={['#0c0a09', '#4338ca']} 
-        style={{height:'100%', justifyContent:'center'}} 
+      <LinearGradient
+        colors={["#0c0a09", "#4338ca"]}
+        style={{ height: "100%", justifyContent: "center" }}
       >
         <Routes>
           <Route path="/home" element={<Home />} />
@@ -61,5 +61,3 @@ export default function App() {
     </NativeRouter>
   );
 }
-
-
