@@ -13,11 +13,6 @@ const LandingPage = () => {
       <TouchableOpacity style={styles.button} onPress={() => {navigate("/HomePage")}}>
         <Text>Jouer</Text>
       </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStartPage")}}>
-        <Text>start(bouton à supprimer)</Text>
-      </TouchableOpacity>
-
     </View>
   );
 };
