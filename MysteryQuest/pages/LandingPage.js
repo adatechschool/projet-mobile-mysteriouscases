@@ -5,20 +5,17 @@ import Navbar from "../components/Navbar";
 const LandingPage = () => {
 
   const navigate = useNavigate(); // Obtenir la fonction de navigation
-  const goToHomePage = () => { // Naviguer vers la route HomePage
-    navigate("/HomePage");
-  };
 
 
   return (
     <View>
       <Text style={styles.title}>Mystery Quest</Text>
-      <TouchableOpacity style={styles.button} onPress={goToHomePage}>
+      <TouchableOpacity style={styles.button} onPress={() => {navigate("/HomePage")}}>
         <Text>Jouer</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.button} onPress={() => {navigate("/RankingPage")}}>
-        <Text>Classement (bouton à supprimer)</Text>
+      <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStartPage")}}>
+        <Text>Quest Start(bouton à supprimer)</Text>
       </TouchableOpacity>
 
     </View>
