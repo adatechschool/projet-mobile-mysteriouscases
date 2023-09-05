@@ -140,6 +140,7 @@ const RankingPage = () => {
                 )}
                 />
         </View>
+        <Text style={[styles.title, {fontSize:24}]}>mon classement : 1/3</Text>
 
     
 
