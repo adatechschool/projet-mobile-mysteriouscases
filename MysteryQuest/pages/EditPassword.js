@@ -16,11 +16,10 @@ import Navbar from "../components/Navbar";
 import Svg, { G, Path } from "react-native-svg";
 import { useState } from "react";
 
-const ProfilePage = () => {
-
-  const navigate = useNavigate()
+const EditPassword = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState("nom-user");
-  const [password, setPassword] = useState('******')
+  const [password, setPassword] = useState("******");
   const profilPic = (
     <Svg
       width="18"
@@ -96,34 +95,18 @@ const ProfilePage = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.line}>
-              <Text style={styles.label}>Nom d'utilisateur :</Text>
-              <Text style={{ fontFamily: "Baskerville", color: "#EAB308" }}>
-                {user}
-              </Text>
-              <TouchableOpacity onPress={() => navigate("/EditUsername")}>
-                {pen}
-              </TouchableOpacity>
-        </View>
-        <View style={styles.line}>
-              <Text style={styles.label}>Mot de passe :</Text>
-              <Text style={{ fontFamily: "Baskerville", color: "#EAB308" }}>
-                {password}
-              </Text>
-              <TouchableOpacity onPress={() => navigate("/EditPassword")}>
-                {pen}
-              </TouchableOpacity>
-        </View>
-        <View style={styles.line}>
-          <Text style={styles.label}>Se déconnecter</Text>
-          <View style={styles.iconContainer}>
-            <TouchableOpacity>{logOut}</TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.line}>
-          <Text style={styles.label}>Supprimer le compte</Text>
-          <View style={styles.iconContainer}>
-            <TouchableOpacity>{supp}</TouchableOpacity>
-          </View>
+          <Text style={styles.label}>Mot de passe actuel : </Text>
+          <Text style={{ fontFamily: "Baskerville", color: "#EAB308" }}>
+            {password}
+          </Text>
+          <Text style={styles.line}>Nouveau mot de passe</Text>
+          <Text style={styles.line}>Confirmer le nouveau mot de passe</Text>
+          <TouchableOpacity onPress={() => navigate("/ProfilePage")}>
+            <Text>Enregistrer</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigate(-1)}>
+            <Text style={{ textDecorationLine: "underline" }}>Annuler</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>
@@ -151,7 +134,6 @@ const styles = StyleSheet.create({
     marginRight: 33,
   },
   line: {
-    flexDirection: "row",
     justifyContent: "center",
     fontFamily: "Baskerville",
     alignItems: "center",
@@ -183,4 +165,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfilePage;
+export default EditPassword;

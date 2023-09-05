@@ -28,6 +28,8 @@ import Connexion from "./components/Connexion";
 import Inscription from "./components/Inscription";
 import Navbar from "./components/Navbar";
 import SettingPage from "./pages/SettingsPage";
+import EditUsername from "./pages/EditUsername";
+import EditPassword from "./pages/EditPassword";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -61,6 +63,8 @@ export default function App() {
           <Route path="/Connexion" element={<Connexion/>} />
           <Route path="/Inscription" element={<Inscription/>} />
           <Route path="/SettingPage" element={<SettingPage/>} />
+          <Route path="/EditUsername" element={<EditUsername />} />
+          <Route path="/EditPassword" element={<EditPassword />} />
         </Routes>
       </LinearGradient>
     </NativeRouter>
