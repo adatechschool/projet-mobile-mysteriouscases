@@ -23,9 +23,6 @@ import RankingPage from "./pages/RankingPage";
 import RulesPage from "./pages/RulesPage";
 import TrophyPage from "./pages/TrophyPage";
 import Menu from "./components/Menu";
-import SettingPage from "./pages/SettingsPage";
-import EditUsername from "./pages/EditUsername";
-import EditPassword from "./pages/EditPassword";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

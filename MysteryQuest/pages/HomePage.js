@@ -9,8 +9,12 @@ import {
 } from "react-native";
 import Navbar from "../components/Navbar";
 import Svg, { G, Path } from "react-native-svg";
+import { useNavigate } from "react-router-native";
 
 const HomePage = () => {
+
+  const navigate = useNavigate();
+
   const quests = [
     {
       title: "La Malette à Mamie",
@@ -34,13 +38,15 @@ const HomePage = () => {
         data={quests}
         renderItem={({ item, index }) => (
           <View key={index} style={styles.questContainer}>
-            <View style={styles.blurryBackground}>
+            <TouchableOpacity 
+              onPress={() => {
+                console.log("je dois rediriger vers la quete ", index);
+                navigate("/QuestStartPage");
+              }}
+              style={styles.blurryBackground}>
               <Text style={styles.itemTitle}>{item.title}</Text>
               <Text style={styles.desc}>{item.desc}</Text>
-              <TouchableOpacity
-                onPress={() =>
-                  console.log("je dois rediriger vers la quete ", index)
-                }
+              <View
                 style={styles.buttonContainer}
               >
                 <Svg
@@ -58,8 +64,8 @@ const HomePage = () => {
                     />
                   </G>
                 </Svg>
-              </TouchableOpacity>
-            </View>
+              </View>
+            </TouchableOpacity>
           </View>
         )}
         style={styles.list}
@@ -83,7 +89,7 @@ const styles = StyleSheet.create({
     marginBottom: 20, // Ajoutez un espacement entre chaque quête
   },
   blurryBackground: {
-    backgroundColor: "rgba(0, 0, 0, 0.3)", // Opacité appliquée ici
+    backgroundColor: "rgba(128, 128, 128, 0.3)", // Opacité appliquée ici
     borderRadius: 25, // Appliquez la bordure au fond flou
     padding: 10, // Ajoutez un espacement autour du fond flou
   },

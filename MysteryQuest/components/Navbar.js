@@ -11,10 +11,9 @@ const Navbar = () => {
         <Text style={styles.title}>Mystery Quest</Text>
       </Link>
       <View>
-      <Menu />
+        <Menu />
+      </View>
     </View>
-    </View>
-
   );
 };
 const styles = StyleSheet.create({
@@ -24,14 +23,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
     left: -15,
-    top: 0
+    top: 0,
   },
   container: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    
   },
 });
 export default Navbar;

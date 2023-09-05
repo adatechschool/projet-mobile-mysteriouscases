@@ -1,19 +1,18 @@
-import { View, Text, Button, StyleSheet, Pressable } from "react-native";
+import { View, Text, Button, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import { useNavigate } from "react-router-native";
 import Navbar from "../components/Navbar";
 
 const LandingPage = () => {
+
   const navigate = useNavigate(); // Obtenir la fonction de navigation
-  const goToHomePage = () => { // Naviguer vers la route HomePage
-    navigate("/HomePage");
-  };
+
 
   return (
     <View>
       <Text style={styles.title}>Mystery Quest</Text>
-      <Pressable style={styles.button} onPress={goToHomePage}>
+      <TouchableOpacity style={styles.button} onPress={() => {navigate("/HomePage")}}>
         <Text>Jouer</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
