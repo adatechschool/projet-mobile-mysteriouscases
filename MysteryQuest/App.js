@@ -17,6 +17,7 @@ import RankingPage from "./pages/RankingPage";
 import RulesPage from "./pages/RulesPage";
 import TrophyPage from "./pages/TrophyPage";
 import Menu from "./components/Menu";
+import Timer from "./components/Timer";
 
 export default function App() {
 
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/RulesPage" element={<RulesPage/>} />
           <Route path="/TrophyPage" element={<TrophyPage/>} />
           <Route path="/Menu" element={<Menu/>} />
+          <Route path="/Timer" element={<Timer/>} /> {/* à supprimer plus tard */}
         </Routes>
       </LinearGradient>
     </NativeRouter>

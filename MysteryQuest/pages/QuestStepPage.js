@@ -10,11 +10,13 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-native";
+// import { useNavigate } from "react-router-native";
+import Timer from "../components/Timer";
+import Clue from "../components/Clue";
 
 const QuestStepPage = () => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
       return (
@@ -29,12 +31,11 @@ const QuestStepPage = () => {
                     style={styles.image} 
                     />
             </View>
-            <TouchableOpacity style={styles.clueBackground}> 
+            {/* <TouchableOpacity style={styles.clueBackground}> 
                 <Text style={[styles.clue]}> Débloquer un indice </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestSuccessPage")}}>
-                <Text style={styles.textButton}>Envoyer ma localisation</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
+            <Clue/>
+            <Timer/>
           </ScrollView>
         </SafeAreaView>
       );
@@ -71,8 +72,6 @@ const styles = StyleSheet.create({
         height: 300,
         resizeMode:'contain',
         borderRadius:20,
-        
-
     },
     title: {
       fontSize: 35,

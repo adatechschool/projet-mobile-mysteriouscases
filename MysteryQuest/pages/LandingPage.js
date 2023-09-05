@@ -15,7 +15,7 @@ const LandingPage = () => {
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStartPage")}}>
-        <Text>Quest Start(bouton à supprimer)</Text>
+        <Text>start(bouton à supprimer)</Text>
       </TouchableOpacity>
 
     </View>
