@@ -14,7 +14,7 @@ import ModalDropdown from 'react-native-modal-dropdown';
 const RankingPage = () => {
 
     //BDD des joueurs et de leurs scores
-    //Probablement plus pertinent de créer une table score par quête et de mettre "username |score" plutôt que de faire une table par joueur
+    //Probablement plus pertinent de créer une table score et de mettre "questID | username |score" plutôt que de faire une table par joueur
     const players = [
         {
             Username: "Camilledu91",
@@ -59,7 +59,7 @@ const RankingPage = () => {
 
     
     
-    // Fonction pour trier les joueurs en fonction d'un score donné
+    // Fonction pour trier les joueurs en fonction d'un score donné (plus besoin quand on fera une requête SQL)
     const sortPlayersByScore = (scoreKey) => {
         return players.slice().sort((a, b) => {
             const scoreA = a[scoreKey];
@@ -80,19 +80,12 @@ const RankingPage = () => {
         return hours * 3600 + minutes * 60 + seconds;
     };
     
-    //Fait pour les 3, mais devrait être fait pour CHAQUE quête  
-    const sortedPlayers1 = sortPlayersByScore('score1');
-    const sortedPlayers2 = sortPlayersByScore('score2');
-    const sortedPlayers3 = sortPlayersByScore('score3');
-
-
     
     // État pour suivre la quête actuellement sélectionnée
     const [selectedQuestId, setSelectedQuestId] = useState(null);
     // Fonction pour changer la quête actuellement sélectionnée
     const handleQuestChange = (index) => {
-        const selectedQuest = quests[index];
-        setSelectedQuestId(selectedQuest.id);
+        setSelectedQuestId(quests[index].id);
     };
 
     
@@ -123,6 +116,8 @@ const RankingPage = () => {
             textStyle={{color:"#eab308", fontSize: 16, fontFamily:"Baskerville"}}
             dropdownStyle={{backgroundColor:'#1e1b4b', borderColor: '#eab308'}}
             dropdownTextStyle={{backgroundColor:'#1e1b4b',color:"#eab308", fontFamily:"Baskerville", fontSize:12}}
+            dropdownTextHighlightStyle={{color:"#eab308", fontFamily:"Baskerville", fontSize:12}}
+            
             />
         <Text style={styles.title2}>weekly | monthly | all time</Text>
 
@@ -189,8 +184,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection:'row',
     justifyContent: 'space-between',
-    border: 1,
-    borderBlockColor: '#eab308',
     fontFamily: "Baskerville",
     fontSize: 16,
     color: "#EAB308",
