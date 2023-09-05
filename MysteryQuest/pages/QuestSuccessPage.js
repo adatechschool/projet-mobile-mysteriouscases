@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
   View,
   Text,
@@ -14,17 +14,34 @@ const QuestSuccessPage = () => {
 
     const navigate = useNavigate();
 
+    const [isFinalStep, setIsFinalStep] = useState(false);
+
 
       return (
         <SafeAreaView style={styles.container}>
           <Navbar />
-            <View style={styles.blurryBackground}> 
-                <Text style={styles.title}>Succès n°X</Text>
-                <Text style={styles.desc}> texte du succès </Text>
-            </View>
-            <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage")}}>
-                <Text style={styles.textButton}>Etape suivante</Text>
-            </TouchableOpacity>
+            {isFinalStep ? (
+              <>
+                <View style={styles.blurryBackground}> 
+                      <Text style={styles.title}>Bravoooo !</Text>
+                      <Text style={styles.desc}> tu as fini la quête </Text>
+                </View>
+                <TouchableOpacity style={styles.button} onPress={() => {navigate("/HomePage")}}>
+                  <Text style={styles.textButton}>Valider la quête</Text>
+                </TouchableOpacity>
+              </>
+            ):(
+              <>
+                <View style={styles.blurryBackground}> 
+                  <Text style={styles.title}>Succès n°X</Text>
+                  <Text style={styles.desc}> texte du succès </Text>
+                </View>
+                <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage")}}>
+                  <Text style={styles.textButton}>Etape suivante</Text>
+                </TouchableOpacity>
+              </>
+            )}
+            
         </SafeAreaView>
       );
 };
