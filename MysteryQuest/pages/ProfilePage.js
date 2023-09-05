@@ -6,13 +6,29 @@ import {
   StyleSheet,
   Button,
   SafeAreaView,
+  TextInput,
+  Alert,
+  Modal,
+  Pressable,
 } from "react-native";
 import Navbar from "../components/Navbar";
 import Svg, { G, Path } from "react-native-svg";
+import { useState } from "react";
 
 const ProfilePage = () => {
-  const user = "nom-user";
-  const password = "********";
+  const [isEditingUsername, setIsEditingUsername] = useState(false);
+  const [editedUsername, setEditedUsername] = useState(user);
+  const handleEditUsername = () => {
+    setIsEditingUsername(true);
+  };
+  const [isEditingPassword, setIsEditingPassword] = useState(false);
+  const [editedPassword, setEditedPassword] = useState(password);
+  const handleEditPassword = () => {
+    setIsEditingPassword(true);
+  };
+
+  const [user, setUser] = useState("nom-user");
+  const [password, setPassword] = useState('******')
   const profilPic = (
     <Svg
       width="18"
@@ -75,7 +91,9 @@ const ProfilePage = () => {
         <Navbar />
       </SafeAreaView>
       <View style={styles.container}>
-        <Text style={{ fontFamily: "Mystery", fontSize: 35 }}>Profil</Text>
+        <Text style={{ fontFamily: "Mystery", fontSize: 35, color: "#EAB308" }}>
+          Profil
+        </Text>
         <View style={styles.profilPicContainer}>
           <Image
             style={styles.profilPic}
@@ -85,18 +103,67 @@ const ProfilePage = () => {
             <View style={styles.profilPicSvg}>{profilPic}</View>
           </TouchableOpacity>
         </View>
-
         <View style={styles.line}>
-          <Text styles={styles.label}>Nom d'utilisateur : {user}</Text>
-          <View style={styles.iconContainer}>
-            <TouchableOpacity>{pen}</TouchableOpacity>
-          </View>
+          {isEditingUsername ? (
+            <>
+              <Text style={styles.label}>Nom d'utilisateur :</Text>
+              <TextInput
+                style={{ fontFamily: "Baskerville", color: "#EAB308" }}
+                onChangeText={(text) => setEditedUsername(text)}
+                value={editedUsername}
+                autoFocus={true}
+                onBlur={() => setIsEditingUsername(false)}
+                onSubmitEditing={() => {
+                  // Ajoutez ici la logique pour enregistrer le nouveau nom d'utilisateur.
+                  // Par exemple, en utilisant une API ou en mettant à jour votre état global si vous en avez un.
+                  // Une fois le nouveau nom d'utilisateur enregistré, vous pouvez exécuter :
+                  setUser(editedUsername);
+                  setIsEditingUsername(false);
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <Text style={styles.label}>Nom d'utilisateur :</Text>
+              <Text style={{ fontFamily: "Baskerville", color: "#EAB308" }}>
+                {user}
+              </Text>
+              <TouchableOpacity onPress={() => setIsEditingUsername(true)}>
+                {pen}
+              </TouchableOpacity>
+            </>
+          )}
         </View>
         <View style={styles.line}>
-          <Text style={styles.label}>Mot de passe: {password}</Text>
-          <View style={styles.iconContainer}>
-            <TouchableOpacity>{pen}</TouchableOpacity>
-          </View>
+          {isEditingPassword ? (
+            <>
+              <Text style={styles.label}>Mot de passe :</Text>
+              <TextInput
+                style={{ fontFamily: "Baskerville", color: "#EAB308" }}
+                onChangeText={(text) => setEditedPassword(text)}
+                value={editedPassword}
+                autoFocus={true}
+                onBlur={() => setIsEditingPassword(false)}
+                onSubmitEditing={() => {
+                  // Ajoutez ici la logique pour enregistrer le nouveau nom d'utilisateur.
+                  // Par exemple, en utilisant une API ou en mettant à jour votre état global si vous en avez un.
+                  // Une fois le nouveau nom d'utilisateur enregistré, vous pouvez exécuter :
+                  setPassword(editedPassword);
+                  setIsEditingPassword(false);
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <Text style={styles.label}>Mot de passe :</Text>
+              <Text style={{ fontFamily: "Baskerville", color: "#EAB308" }}>
+                {password}
+              </Text>
+              <TouchableOpacity onPress={() => setIsEditingPassword(true)}>
+                {pen}
+              </TouchableOpacity>
+            </>
+          )}
         </View>
         <View style={styles.line}>
           <Text style={styles.label}>Se déconnecter</Text>
@@ -116,29 +183,36 @@ const ProfilePage = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     alignItems: "center",
-    padding: 50,
+    padding: 30,
     rowGap: 8,
   },
   label: {
     flex: 1,
     fontFamily: "Baskerville",
+    color: "#EAB308",
+    marginLeft: 75,
+    marginTop: 11,
   },
   iconContainer: {
     width: 25,
     height: 25,
     borderRadius: 200,
-    alignItems: "center",
+    alignItems: "",
     justifyContent: "center",
-    marginRight: 110,
+    marginRight: 33,
   },
   line: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     fontFamily: "Baskerville",
     alignItems: "center",
-    marginBottom: 10,
+    color: "#EAB308",
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    marginBottom: -8,
+    paddingBottom: 6,
+    marginHorizontal: 4,
+    borderRadius: 1,
   },
   profilPic: {
     backgroundColor: "white",
