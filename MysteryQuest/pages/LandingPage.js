@@ -1,6 +1,6 @@
 import { View, Text, Button, StyleSheet, Pressable, TouchableOpacity } from "react-native";
 import { useNavigate } from "react-router-native";
-import Navbar from "../components/Navbar";
+import Svg, { G, Path, Rect } from "react-native-svg";
 
 const LandingPage = () => {
 
@@ -12,6 +12,12 @@ const LandingPage = () => {
       <Text style={styles.title}>Mystery Quest</Text>
       <TouchableOpacity style={styles.button} onPress={() => {navigate("/HomePage")}}>
         <Text>Jouer</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => {navigate("/Connexion")}}>
+        <Text>Connexion</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => {navigate("/Inscription")}}>
+        <Text>Inscription</Text>
       </TouchableOpacity>
     </View>
   );
