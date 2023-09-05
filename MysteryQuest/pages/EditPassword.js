@@ -85,27 +85,42 @@ const EditPassword = () => {
         <Text style={{ fontFamily: "Mystery", fontSize: 35, color: "#EAB308" }}>
           Profil
         </Text>
-        <View style={styles.profilPicContainer}>
-          <Image
-            style={styles.profilPic}
-            source={{ uri: "https://reactnative.dev/img/tiny_logo.png" }}
-          />
-          <TouchableOpacity style={styles.profilPicBg}>
-            <View style={styles.profilPicSvg}>{profilPic}</View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.line}>
-          <Text style={styles.label}>Mot de passe actuel : </Text>
-          <Text style={{ fontFamily: "Baskerville", color: "#EAB308" }}>
-            {password}
-          </Text>
-          <Text style={styles.line}>Nouveau mot de passe</Text>
-          <Text style={styles.line}>Confirmer le nouveau mot de passe</Text>
+
+        <View
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            borderRadius: 25,
+            paddingTop: 15,
+            paddingBottom: 15,
+            padding: 50,
+          }}
+        >
+          <Text style={styles.fontAndColor}>Mot de passe actuel : </Text>
+          <TextInput style={styles.inputStyle}></TextInput>
+
+          <View>
+            <Text style={styles.fontAndColor}>Nouveau mot de passe : </Text>
+            <TextInput style={styles.inputStyle} />
+          </View>
+          <View>
+            <Text style={styles.fontAndColor}>
+              Confirmer le nouveau mot de passe:{" "}
+            </Text>
+            <TextInput style={styles.inputStyle} />
+          </View>
           <TouchableOpacity onPress={() => navigate("/ProfilePage")}>
-            <Text>Enregistrer</Text>
+            <Text style={styles.fontAndColor}>Enregistrer</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigate(-1)}>
-            <Text style={{ textDecorationLine: "underline" }}>Annuler</Text>
+            <Text
+              style={{
+                fontFamily: "Baskerville",
+                color: "#EAB308",
+                textDecorationLine: "underline",
+              }}
+            >
+              Annuler
+            </Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -113,10 +128,26 @@ const EditPassword = () => {
   );
 };
 const styles = StyleSheet.create({
+  inputStyle: {
+    fontFamily: "Baskerville",
+    color: "#EAB308",
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 5,
+    paddingLeft: 30,
+    borderColor: "#EAB308",
+    borderWidth: 1.7,
+  },
+  fontAndColor: {
+    fontFamily: "Baskerville",
+    color: "#EAB308",
+    fontSize: 17,
+  },
   container: {
     alignItems: "center",
     padding: 30,
-    rowGap: 8,
+    rowGap: 1,
+    backgroundColor: "",
   },
   label: {
     flex: 1,
