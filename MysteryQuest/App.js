@@ -49,7 +49,6 @@ export default function App() {
           <Route path="/RulesPage" element={<RulesPage/>} />
           <Route path="/TrophyPage" element={<TrophyPage/>} />
           <Route path="/Menu" element={<Menu/>} />
-          <Route path="/Timer" element={<Timer/>} /> {/* à supprimer plus tard */}
         </Routes>
       </LinearGradient>
     </NativeRouter>
