@@ -56,7 +56,7 @@ const QuestStartPage = () => {
       {location && (
         <Text>
           Latitude: {location.coords.latitude}, Longitude:
-          {location.coords.longitude}
+          {location.coords.longitude}''
         </Text>
       )}
     </View>
