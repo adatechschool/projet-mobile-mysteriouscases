@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NativeRouter, Route, Link, Routes } from "react-router-native";
 import {
   SafeAreaView,
