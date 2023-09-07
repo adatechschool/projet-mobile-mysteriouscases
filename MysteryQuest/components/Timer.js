@@ -3,13 +3,18 @@ import { Text, View, Button, StyleSheet, TouchableOpacity  } from 'react-native'
 import { Svg, G, Path } from "react-native-svg";
 import { useNavigate } from "react-router-native";
 
-const Timer = () => {
+const Timer = ({onWrongLocationPress}) => {
 
     const navigate = useNavigate();
 
     const [isRunning, setIsRunning] = useState(true);
     const [elapsedTime, setElapsedTime] = useState(0);
-    const [savedTime, setSavedTime] = useState(0); 
+    const [savedTime, setSavedTime] = useState(0);
+    const [rightLocation, setRightLocation] = useState(false);
+
+    const validateLocation = () => {
+      setRightLocation(true);
+    };
   
     useEffect(() => {
       let interval;
@@ -27,7 +32,7 @@ const Timer = () => {
   
     
   
-    const checkLocalisation = () => {
+    const checkLocation = () => {
       setIsRunning(false);
       setSavedTime(elapsedTime);
       navigate("/QuestSuccessPage");
@@ -57,7 +62,10 @@ const Timer = () => {
                 </Svg>
                 <Text style={styles.chronometerText}> {formatTime(elapsedTime)} </Text>
             </View>
-            <TouchableOpacity style={styles.button} onPress={checkLocalisation}>
+            <TouchableOpacity 
+              style={styles.button} 
+              onPress={rightLocation ? checkLocation : onWrongLocationPress }
+            > 
                 <Text style={styles.textButton}>Envoyer ma localisation</Text>
             </TouchableOpacity>
         </View>

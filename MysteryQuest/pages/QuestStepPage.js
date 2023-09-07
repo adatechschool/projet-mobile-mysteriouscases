@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState }  from "react";
 import {
   View,
   Image,
@@ -10,13 +10,24 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Navbar from "../components/Navbar";
-// import { useNavigate } from "react-router-native";
+import { useNavigate } from "react-router-native";
 import Timer from "../components/Timer";
 import Clue from "../components/Clue";
+import WrongLocation from "../components/WrongLocation";
 
 const QuestStepPage = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    
+    const [ShowWrongLocation, setShowWrongLocation] = useState(false);
+
+    const openWrongLocation = () => {
+      setShowWrongLocation(true);
+    };
+    const closeWrongLocation = () => {
+      setShowWrongLocation(false);
+    };
 
 
       return (
@@ -31,11 +42,13 @@ const QuestStepPage = () => {
                     style={styles.image} 
                     />
             </View>
-            {/* <TouchableOpacity style={styles.clueBackground}> 
-                <Text style={[styles.clue]}> Débloquer un indice </Text>
-            </TouchableOpacity> */}
             <Clue/>
-            <Timer/>
+            <Timer onWrongLocationPress={openWrongLocation}/>
+            {ShowWrongLocation && (
+              <View style={styles.overlay}>
+                <WrongLocation onClose={closeWrongLocation}/>
+              </View>
+            )}
           </ScrollView>
         </SafeAreaView>
       );
@@ -95,7 +108,17 @@ const styles = StyleSheet.create({
         lineHeight: 24,
         fontSize: 16,
         color: "#1e1b4b",
-    }
+    },
+    overlay: {
+      position: "absolute",
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      // backgroundColor: "rgba(0, 0, 0, 0.3)",
+      justifyContent: "center",
+      alignItems: "center",
+    },
   });
 
 export default QuestStepPage;
