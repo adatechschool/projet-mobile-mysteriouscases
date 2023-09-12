@@ -5,6 +5,7 @@ const app = express();
 const port = 3000;
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
+
 const usersRoutes = require("./routes/usersRoutes")
 const questsRoutes = require("./routes/questsRoutes")
 const scoresRoutes = require("./routes/scoresRoutes")

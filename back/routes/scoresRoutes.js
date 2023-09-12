@@ -3,5 +3,6 @@ const router = express.Router();
 const scoresController = require("../controllers/scoresController");
 
 router.get("/getAllScores", scoresController.getAllScores);
+router.get("/getQuestScores", scoresController.getQuestScores);
 
 module.exports = router;

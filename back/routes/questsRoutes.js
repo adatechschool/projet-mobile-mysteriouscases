@@ -4,4 +4,6 @@ const questsController = require("../controllers/questsController");
 
 router.get("/getAllQuests", questsController.getAllQuests);
 
+router.get("/getSingleQuest", questsController.getSingleQuest);
+
 module.exports = router;
