@@ -16,6 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `scores`
+--
+
+DROP TABLE IF EXISTS `scores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `scores` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `date` date DEFAULT NULL,
+  `score` varchar(10) DEFAULT NULL,
+  `user` int DEFAULT NULL,
+  `quest` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `quest_id` (`quest`),
+  KEY `user_id` (`user`),
+  CONSTRAINT `quest_id` FOREIGN KEY (`quest`) REFERENCES `quests` (`id`),
+  CONSTRAINT `user_id` FOREIGN KEY (`user`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `scores`
 --
 
@@ -33,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-12 10:25:40
+-- Dump completed on 2023-09-12 10:41:00

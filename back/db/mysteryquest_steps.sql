@@ -16,6 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `steps`
+--
+
+DROP TABLE IF EXISTS `steps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `steps` (
+  `id` int NOT NULL,
+  `quest` int DEFAULT NULL,
+  `step_number` int DEFAULT NULL,
+  `step_text` text,
+  `step_image` text,
+  `lattitude` decimal(45,0) DEFAULT NULL,
+  `longitute` decimal(45,0) DEFAULT NULL,
+  `clue1` text,
+  `clue2` text,
+  `clue3` text,
+  PRIMARY KEY (`id`),
+  KEY `quest_idx` (`quest`),
+  CONSTRAINT `quest` FOREIGN KEY (`quest`) REFERENCES `quests` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Dumping data for table `steps`
 --
 
@@ -33,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-12 10:25:41
+-- Dump completed on 2023-09-12 10:41:00
