@@ -1,7 +1,7 @@
 const connectDB = require("../routes/db-config/db")
 
-exports.getAllUsers = (req, res) => {
-  const sql = "SELECT * FROM users";
+exports.getAllSteps = (req, res) => {
+  const sql = "SELECT * FROM steps";
   connectDB.query(sql, (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
