@@ -13,16 +13,6 @@ app.get("/", (req, res) => {
   res.send("Coucou je suis le backend");
 });
 
-app.get("/users", (req, res) => {
-  connection.query("SELECT * FROM users", (error, data) => {
-    if (error) {
-      return;
-    } else {
-      res.send(data);
-    }
-  });
-});
-
 app.listen(port, () => {
   console.log(`le back tourne sur le serveur ${port}`);
 });
@@ -30,3 +20,5 @@ app.listen(port, () => {
 app.post("/user", (req, res) => {
   res.s;
 });
+const usersRoutes = require("./routes/usersRoutes");
+app.use("/api/users", usersRoutes);
