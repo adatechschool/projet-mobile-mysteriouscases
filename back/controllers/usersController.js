@@ -1,5 +1,5 @@
 const connectDB = require("../routes/db-config/db");
-const mysql = require("mysql2");
+// const mysql = require("mysql2");
 
 exports.getAllUsers = (req, res) => {
   const sql = "SELECT * FROM users";

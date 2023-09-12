@@ -9,14 +9,14 @@ const connection = mysql.createConnection({
   port: process.env.DB_PORT,
 });
 //Vérification de la connexion
-const connectDB = () => {
-  connection.connect((err) => {
-    if (err) {
-      console.error("Erreur de connexion à la base de données :", err);
-      throw err;
-    }
-    console.log("Connecté à la base de données MySQL. Trop forte Camille !");
-  });
-};
-module.exports = connectDB();
+
+connection.connect((err) => {
+  if (err) {
+    console.error("Erreur de connexion à la base de données :", err);
+    throw err;
+  }
+  console.log("Connecté à la base de données MySQL. Trop forte Camille !");
+});
+
+
 module.exports = connection;
