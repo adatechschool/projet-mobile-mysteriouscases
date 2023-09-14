@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,20 +15,19 @@ const HomePage = () => {
 
   const navigate = useNavigate();
 
-  const quests = [
-    {
-      title: "La Malette à Mamie",
-      desc: "Explorez le quartier, résolvez des énigmes et découvrez les souvenirs cachés pour retrouver la malette perdue de Mamie.",
-    },
-    {
-      title: "Où est Camille ?",
-      desc: "Camille, la petite fille que tu devais garder a disparu. Retrouve-la rapidement avant que ses mamans rentrent du travail !",
-    },
-    {
-      title: "Les Ailes d'Élara",
-      desc: "Découvrez les mystères de Paris en aidant la fée Élara à retrouver des fragments magiques et à sauver l'équilibre entre les mondes.",
-    },
-  ];
+  const [quests, setQuests] = useState([])
+
+  useEffect(() => {
+    fetch("http://192.168.4.233:3000/quests/getAllQuests")
+      .then((response) => response.json())
+      .then((data) => {
+        setQuests(data) ;
+      
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des quêtes", error);
+      })
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,7 +44,7 @@ const HomePage = () => {
               }}
               style={styles.blurryBackground}>
               <Text style={styles.itemTitle}>{item.title}</Text>
-              <Text style={styles.desc}>{item.desc}</Text>
+              <Text style={styles.desc}>{item.preview}</Text>
               <View
                 style={styles.buttonContainer}
               >
