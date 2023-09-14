@@ -39,8 +39,8 @@ exports.addUser = (req, res) => {
 };
 
 exports.deleteUser = (req, res) => {
-  const id = req.params;
-  const sql = "DELETE FROM users WHERE id = ?";
+  const id = req.params.id;
+  const sql = "DELETE * FROM users WHERE id = ?";
   connectDB.query(sql, [id], (error) => {
     if (error) {
       console.error(error);
