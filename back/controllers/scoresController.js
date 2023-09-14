@@ -24,6 +24,7 @@ exports.getQuestScores = (req, res) => {
   });
 };
 
+
 //Créer un nouveau score
 exports.postScore = (req, res) => {
   const user = req.body.user
