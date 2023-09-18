@@ -12,22 +12,19 @@ import Svg, { G, Path } from "react-native-svg";
 import { useNavigate } from "react-router-native";
 
 const HomePage = () => {
-
   const navigate = useNavigate();
 
-  const [quests, setQuests] = useState([])
-
+  const [quests, setQuests] = useState([]);
 
   useEffect(() => {
     fetch(`${process.env.EXPO_PUBLIC_API_URL}/quests/getAllQuests`)
       .then((response) => response.json())
       .then((data) => {
-        setQuests(data) ;
-      
+        setQuests(data);
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération des quêtes", error);
-      })
+      });
   }, []);
 
   return (
@@ -38,17 +35,16 @@ const HomePage = () => {
         data={quests}
         renderItem={({ item, index }) => (
           <View key={index} style={styles.questContainer}>
-            <TouchableOpacity 
+            <TouchableOpacity
               onPress={() => {
                 console.log("je dois rediriger vers la quete ", index);
                 navigate("/QuestStartPage");
               }}
-              style={styles.blurryBackground}>
+              style={styles.blurryBackground}
+            >
               <Text style={styles.itemTitle}>{item.title}</Text>
               <Text style={styles.desc}>{item.preview}</Text>
-              <View
-                style={styles.buttonContainer}
-              >
+              <View style={styles.buttonContainer}>
                 <Svg
                   width="77"
                   height="12"
@@ -120,4 +116,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomePage;
+
+BBexport default HomePage;
