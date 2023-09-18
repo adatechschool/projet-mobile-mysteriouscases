@@ -1,17 +1,14 @@
 import React from "react";
 import {
   View,
-  Alert,
-  Button,
   Text,
-  FlatList,
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import Navbar from "../components/Navbar";
 import { useNavigate, useParams } from "react-router-native";
-import * as Location from "expo-location";
 import { useState, useEffect } from "react";
 
 
@@ -27,58 +24,25 @@ const QuestStartPage = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data[0].title)
-        setQuest(data);
-      })
+        setQuest(data);})
       .catch((error) => {
         console.error("Erreur lors du chargement de la quête", error);
       });
   }, [id]);
 
-
-  // const [location, setLocation] = useState(null);
-
-  // const getLocation = async () => {
-  //   try {
-  //     let { status } = await Location.requestForegroundPermissionsAsync();
-  //     if (status !== "granted") {
-  //       throw new Error("Please grant location permissions.");
-  //     }
-
-  //     let currentLocation = await Location.getCurrentPositionAsync({
-  //       enableHighAccuracy: true,
-  //       timeout: 20000,
-  //       maximumAge: 1000,
-  //     });
-
-  //     setLocation(currentLocation);
-  //     console.log("Location:", currentLocation);
-  //   } catch (error) {
-  //     Alert.alert(error.message);
-  //   }
-  // };
-
-
-
       return (
         <SafeAreaView style={styles.container}>
           <Navbar />
+          <ScrollView>
+
             <Text style={styles.title}>{quest ? quest[0].title : "Chargement en cours..."}</Text>
             <View style={styles.blurryBackground}> 
-                <Text style={styles.desc}>{quest ? quest[0].story : "Chargement en cours..."}</Text>
+                <Text style={styles.desc}>    {quest ? quest[0].story : "Chargement en cours..."}</Text>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage")}}>
                 <Text style={styles.textButton}>Commencer la quête</Text>
             </TouchableOpacity>
-    {/* <View>
-      <Button title="Get Location" onPress={getLocation}></Button>
-      {location && (
-        <Text>
-          Latitude: {location.coords.latitude}, Longitude:
-          {location.coords.longitude}''
-        </Text>
-      )}
-    </View> */}
-
+          </ScrollView>
         </SafeAreaView>
       );
 };
@@ -90,19 +54,20 @@ const styles = StyleSheet.create({
       padding: 10,
     },
     blurryBackground: {
-      backgroundColor: "rgba(0, 0, 0, 0.3)", // Opacité appliquée ici
-      borderRadius: 25, // Appliquez la bordure au fond flou
-      padding: 10, // Ajoutez un espacement autour du fond flou
+      backgroundColor: "rgba(0, 0, 0, 0.3)",
+      borderRadius: 25,
+      padding: 10,
     },
     desc: {
       fontFamily: "Baskerville",
-      textAlign: "justify",
-      lineHeight: 24,
-      fontSize: 12,
-      color: "#EAB308",
+    textAlign: "justify",
+    fontSize: 16,
+    lineHeight:30,
+    color: "#EAB308",
+    padding:4,
     },
     title: {
-      fontSize: 35,
+      fontSize: 36,
       textAlign: "center",
       paddingTop: 50,
       paddingBottom: 20,
@@ -110,12 +75,12 @@ const styles = StyleSheet.create({
       color: "#EAB308",
     },
     button: {
-        alignItems: 'center',
-        paddingVertical: 12,
-        margin: 60,
-        borderRadius: 15,
-        backgroundColor: '#EAB308',
-        fontFamily: "Mystery",
+      alignItems: 'center',
+      paddingVertical: 12,
+      marginHorizontal: 60,
+      marginVertical: 20,
+      borderRadius: 15,
+      backgroundColor: '#EAB308',
     },
     textButton: {
         fontFamily: "Baskerville",
