@@ -17,8 +17,9 @@ const HomePage = () => {
 
   const [quests, setQuests] = useState([])
 
+
   useEffect(() => {
-    fetch("http://192.168.4.233:3000/quests/getAllQuests")
+    fetch(`${process.env.EXPO_PUBLIC_API_URL}/quests/getAllQuests`)
       .then((response) => response.json())
       .then((data) => {
         setQuests(data) ;
