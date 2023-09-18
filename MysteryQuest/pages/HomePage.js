@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Navbar from "../components/Navbar";
 import Svg, { G, Path } from "react-native-svg";
-import { useNavigate, useNavigation } from "react-router-native";
+import { useNavigate } from "react-router-native";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const HomePage = () => {
     fetch(`${process.env.EXPO_PUBLIC_API_URL}/quests/getAllQuests`)
       .then((response) => response.json())
       .then((data) => {
-        setQuests(data);
+        setQuests(data) ;
       })
       .catch((error) => {
         console.error("Erreur lors de la récupération des quêtes", error);
@@ -82,23 +82,25 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   questContainer: {
-    marginBottom: 20, // Ajoutez un espacement entre chaque quête
+    marginBottom: 20,
   },
   blurryBackground: {
-    backgroundColor: "rgba(0,0,0, 0.3)", // Opacité appliquée ici
-    borderRadius: 25, // Appliquez la bordure au fond flou
-    padding: 10, // Ajoutez un espacement autour du fond flou
+    backgroundColor: "rgba(0,0,0, 0.3)",
+    borderRadius: 25,
+    padding: 10,
   },
   itemTitle: {
-    fontSize: 29,
+    fontSize: 32,
     textAlign: "center",
     fontFamily: "Mystery",
     color: "#EAB308",
+    paddingBottom:4
   },
   desc: {
     fontFamily: "Baskerville",
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
+    lineHeight:24,
     color: "#EAB308",
   },
   title: {
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
     color: "#EAB308",
   },
   buttonContainer: {
-    alignItems: "flex-end", // Centrer horizontalement
+    alignItems: "flex-end",
     marginTop: 15,
     marginBottom: 5,
     paddingRight: 20,
