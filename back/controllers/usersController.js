@@ -24,9 +24,9 @@ exports.getUsers = (req, res) => {
 };
 
 exports.addUser = (req, res) => {
+  const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
-  const username = req.body.username;
   const sql = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
   connectDB.query(sql, [username, email, password], (error) => {
     if (error) {
