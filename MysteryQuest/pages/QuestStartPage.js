@@ -24,8 +24,7 @@ const QuestStartPage = () => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data[0].title)
-        setQuest(data);
-      })
+        setQuest(data);})
       .catch((error) => {
         console.error("Erreur lors du chargement de la quête", error);
       });

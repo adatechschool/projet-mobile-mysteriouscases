@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Navbar from "../components/Navbar";
 import Svg, { G, Path } from "react-native-svg";
-import { useNavigate, useNavigation } from "react-router-native";
+import { useNavigate } from "react-router-native";
 
 const HomePage = () => {
   const navigate = useNavigate();
