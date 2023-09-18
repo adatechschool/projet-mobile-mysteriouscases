@@ -116,5 +116,4 @@ const styles = StyleSheet.create({
   },
 });
 
-
-BBexport default HomePage;
+export default HomePage;
