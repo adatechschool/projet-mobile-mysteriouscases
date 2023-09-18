@@ -10,48 +10,66 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-native";
+import { useNavigate, useParams } from "react-router-native";
 import * as Location from "expo-location";
 import { useState, useEffect } from "react";
 
 
 const QuestStartPage = () => {
-  const [location, setLocation] = useState(null);
 
-  const getLocation = async () => {
-    try {
-      let { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") {
-        throw new Error("Please grant location permissions.");
-      }
+  const { id } = useParams();
+  const navigate = useNavigate()
+  const [quest, setQuest] = useState();
 
-      let currentLocation = await Location.getCurrentPositionAsync({
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 1000,
+ // Récupération des données de la quête en utilisant l'ID de l'URL
+  useEffect(() => {
+    fetch(`${process.env.EXPO_PUBLIC_API_URL}/quests/getSingleQuest/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0].title)
+        setQuest(data);
+      })
+      .catch((error) => {
+        console.error("Erreur lors du chargement de la quête", error);
       });
+  }, [id]);
 
-      setLocation(currentLocation);
-      console.log("Location:", currentLocation);
-    } catch (error) {
-      Alert.alert(error.message);
-    }
-  };
 
-    const navigate = useNavigate();
+  // const [location, setLocation] = useState(null);
+
+  // const getLocation = async () => {
+  //   try {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       throw new Error("Please grant location permissions.");
+  //     }
+
+  //     let currentLocation = await Location.getCurrentPositionAsync({
+  //       enableHighAccuracy: true,
+  //       timeout: 20000,
+  //       maximumAge: 1000,
+  //     });
+
+  //     setLocation(currentLocation);
+  //     console.log("Location:", currentLocation);
+  //   } catch (error) {
+  //     Alert.alert(error.message);
+  //   }
+  // };
+
 
 
       return (
         <SafeAreaView style={styles.container}>
           <Navbar />
-            <Text style={styles.title}>Quest Title</Text>
+            <Text style={styles.title}>{quest ? quest[0].title : "Chargement en cours..."}</Text>
             <View style={styles.blurryBackground}> 
-                <Text style={styles.desc}> Quest description </Text>
+                <Text style={styles.desc}>{quest ? quest[0].story : "Chargement en cours..."}</Text>
             </View>
             <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage")}}>
                 <Text style={styles.textButton}>Commencer la quête</Text>
             </TouchableOpacity>
-    <View>
+    {/* <View>
       <Button title="Get Location" onPress={getLocation}></Button>
       {location && (
         <Text>
@@ -59,7 +77,7 @@ const QuestStartPage = () => {
           {location.coords.longitude}''
         </Text>
       )}
-    </View>
+    </View> */}
 
         </SafeAreaView>
       );
