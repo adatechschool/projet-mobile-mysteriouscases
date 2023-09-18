@@ -9,15 +9,14 @@ import {
 } from "react-native";
 import Navbar from "../components/Navbar";
 import Svg, { G, Path } from "react-native-svg";
-import { useNavigate } from "react-router-native";
+import { useNavigate, useNavigation } from "react-router-native";
 
 const HomePage = () => {
 
   const navigate = useNavigate();
-
   const [quests, setQuests] = useState([])
-
-
+ 
+  //Récupération de toutes les quêtes
   useEffect(() => {
     fetch(`${process.env.EXPO_PUBLIC_API_URL}/quests/getAllQuests`)
       .then((response) => response.json())
@@ -40,8 +39,8 @@ const HomePage = () => {
           <View key={index} style={styles.questContainer}>
             <TouchableOpacity 
               onPress={() => {
-                console.log("je dois rediriger vers la quete ", index);
-                navigate("/QuestStartPage");
+                console.log("je dois rediriger vers la quete ", item.id);
+                navigate(`/QuestStartPage/${item.id}`);
               }}
               style={styles.blurryBackground}>
               <Text style={styles.itemTitle}>{item.title}</Text>

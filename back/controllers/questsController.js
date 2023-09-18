@@ -15,8 +15,10 @@ exports.getAllQuests = (req, res) => {
 
 //Afficher la quête sélectionnée en fonction de l'id
 exports.getSingleQuest = (req, res) => {
+  const questId = req.params.id
   const sql = "SELECT * FROM quests WHERE id = ?";
-  connectDB.query(sql, (err, results) => {
+
+  connectDB.query(sql, [questId], (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
