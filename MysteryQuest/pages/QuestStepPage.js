@@ -67,7 +67,10 @@ const QuestStepPage = () => {
           <Clue data={step[0].clue3} /> 
           <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <Timer />
-            <SendLocation onWrongLocationPress={openWrongLocation}/>
+            <SendLocation 
+              onWrongLocationPress={openWrongLocation}
+              data={step[0]}
+              />
           </View>
         </>
       ):(

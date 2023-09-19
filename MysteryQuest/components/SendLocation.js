@@ -3,20 +3,23 @@ import { Text, View, Button, StyleSheet, TouchableOpacity  } from 'react-native'
 import { Svg, G, Path } from "react-native-svg";
 import { useNavigate } from "react-router-native";
 
-const SendLocation = ({onWrongLocationPress}) => {
+const SendLocation = ({onWrongLocationPress, data}) => {
+
 
     const navigate = useNavigate();
 
-    const [rightLocation, setRightLocation] = useState(false);
+    const [rightLocation, setRightLocation] = useState(true);
 
     const validateLocation = () => {
       setRightLocation(true);
     };
 
     const checkLocation = () => {
-      setIsRunning(false);
-      setSavedTime(elapsedTime);
-      navigate("/QuestSuccessPage");
+    //   setIsRunning(false);
+    //   setSavedTime(elapsedTime);
+        console.log("console log à l'interieur de checklocation", data.quest, data.step_number);
+        console.log(`/QuestSuccessPage/${data.quest}/${data.step_number}`)
+        navigate(`/QuestSuccessPage/${data.quest}/${data.step_number}`);
     };
 
 
