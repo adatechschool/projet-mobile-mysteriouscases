@@ -1,20 +1,13 @@
 import React, { useState, useEffect }  from 'react';
 import { Text, View, Button, StyleSheet, TouchableOpacity  } from 'react-native';
 import { Svg, G, Path } from "react-native-svg";
-import { useNavigate } from "react-router-native";
 
-const Timer = ({onWrongLocationPress}) => {
+const Timer = () => {
 
-    const navigate = useNavigate();
 
     const [isRunning, setIsRunning] = useState(true);
     const [elapsedTime, setElapsedTime] = useState(0);
     const [savedTime, setSavedTime] = useState(0);
-    const [rightLocation, setRightLocation] = useState(false);
-
-    const validateLocation = () => {
-      setRightLocation(true);
-    };
   
     useEffect(() => {
       let interval;
@@ -30,14 +23,6 @@ const Timer = ({onWrongLocationPress}) => {
       return () => clearInterval(interval); // Nettoyage du setInterval lors du démontage du composant
     }, [isRunning]);
   
-    
-  
-    const checkLocation = () => {
-      setIsRunning(false);
-      setSavedTime(elapsedTime);
-      navigate("/QuestSuccessPage");
-    };
-
 
     // Fonction pour formater le temps en hh:mm:ss
     const formatTime = (timeInSeconds) => {
@@ -62,12 +47,6 @@ const Timer = ({onWrongLocationPress}) => {
                 </Svg>
                 <Text style={styles.chronometerText}> {formatTime(elapsedTime)} </Text>
             </View>
-            <TouchableOpacity 
-              style={styles.button} 
-              onPress={rightLocation ? checkLocation : onWrongLocationPress }
-            > 
-                <Text style={styles.textButton}>Envoyer ma localisation</Text>
-            </TouchableOpacity>
         </View>
     );
 };
