@@ -1,19 +1,15 @@
-import React, { useState, useEffect }  from 'react';
-import { Text, View, Button, StyleSheet, TouchableOpacity  } from 'react-native';
-import { Svg, G, Path } from "react-native-svg";
+import React, { useState }  from 'react';
+import { Text, View, StyleSheet, TouchableOpacity  } from 'react-native';
 import { useNavigate } from "react-router-native";
 import * as Location from "expo-location";
 
 const SendLocation = ({onWrongLocationPress, data}) => {
 
-
     const navigate = useNavigate();
     const [userLocation, setUserLocation] = useState(null);
     const [rightLocation, setRightLocation] = useState(false);
 
-
-
-    //Récupération de la localisation
+    //Récupération de la localisation de l'utilisateur
     const getUserLocation = async () => {
         try {
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -26,50 +22,56 @@ const SendLocation = ({onWrongLocationPress, data}) => {
             maximumAge: 1000,
         });
         setUserLocation(currentLocation);
-        console.log("Location:", currentLocation);
+        // console.log("Location:", currentLocation);
         } 
         catch (error) {
         console.error("localisation inconnue",error.message);
         }
     };
 
-    const validateLocation = () => {
-      setRightLocation(true);
+    //Compare la localisation de l'utilisateur et celle de la quette
+    const compareLocations = (userLat, userLon, goalLat, goalLon) => {
+        const latDifference = Math.abs(userLat - goalLat);
+        const lonDifference = Math.abs(userLon - goalLon);
+        const threshold = 0.0002
+
+        if (latDifference <= threshold && lonDifference <= threshold) {
+            console.log("Gagné, vous êtes au bon endroit !");
+            return true;
+        } else {
+            console.log("Et non, tu es trop loin !");
+            return false;
+        } 
     };
 
-    const checkLocation = () => {
-    //   setIsRunning(false);
-    //   setSavedTime(elapsedTime);
-        console.log("console log à l'interieur de checklocation", data.quest, data.step_number);
-        console.log(`/QuestSuccessPage/${data.quest}/${data.step_number}`)
-        navigate(`/QuestSuccessPage/${data.quest}/${data.step_number}`);
-        // validateLocation()
-        
+    //Actions lorsqu'on appuie sur le bouton "Envoyer ma localisation"
+    const handlePress = async () => {
+
+        await getUserLocation();
+
+        if (userLocation) {
+            console.log(`userLattitude: ${userLocation.coords.latitude}, userLongitude: ${userLocation.coords.longitude}, stepLattitude: ${data.lattitude}, stepLongitude: ${data.longitude}`);
+
+            const isLocationCorrect = compareLocations(userLocation.coords.latitude, userLocation.coords.longitude, data.lattitude, data.longitude);
+
+            if (isLocationCorrect) {
+                setRightLocation(true);
+                navigate(`/QuestSuccessPage/${data.quest}/${data.step_number}`)
+            }
+            else {
+                onWrongLocationPress();
+            }
+        }
     };
-
-
-
 
     return (
         <View style={styles.container}>
-            <View style={styles.container}>
-                <TouchableOpacity 
-                style={styles.button} 
-                onPress={rightLocation ? checkLocation : onWrongLocationPress }
-                > 
-                    <Text style={styles.textButton}>Envoyer ma localisation</Text>
-                </TouchableOpacity>
-            </View>
-                    
-            <View>
-                <Button title="Get Location" onPress={getUserLocation}></Button>
-                {userLocation && (
-                    <Text>
-                    Latitude: {userLocation.coords.latitude}, Longitude:
-                    {userLocation.coords.longitude}''
-                </Text>
-                )}
-            </View>
+            <TouchableOpacity 
+            style={styles.button} 
+            onPress={handlePress}
+            > 
+                <Text style={styles.textButton}>Envoyer ma localisation</Text>
+            </TouchableOpacity>
         </View>
     );
 };
@@ -77,7 +79,6 @@ const SendLocation = ({onWrongLocationPress, data}) => {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
       alignItems: 'center',
       flexDirection:'column',
       justifyContent:"space-between"
