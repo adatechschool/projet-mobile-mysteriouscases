@@ -16,7 +16,7 @@ const QuestStartPage = () => {
 
   const { id } = useParams();
   const navigate = useNavigate()
-  const [quest, setQuest] = useState();
+  const [quest, setQuest] = useState(null);
 
  // Récupération des données de la quête en utilisant l'ID de l'URL
   useEffect(() => {
@@ -39,7 +39,7 @@ const QuestStartPage = () => {
             <View style={styles.blurryBackground}> 
                 <Text style={styles.desc}>    {quest ? quest[0].story : "Chargement en cours..."}</Text>
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => {navigate(`/QuestStepPage/${quest[0].id}/0`)}}>
+            <TouchableOpacity style={styles.button} onPress={() => {navigate(`/QuestStepPage/${quest[0].id}/1`)}}>
                 <Text style={styles.textButton}>Commencer la quête</Text>
             </TouchableOpacity>
           </ScrollView>

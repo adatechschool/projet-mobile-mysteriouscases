@@ -1,28 +1,28 @@
 import React, {useState} from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Clue = () => {
+const Clue = ({data}) => {
 
-    const clues = [
-        {
-            id:1,
-            questID: 1,
-            clueNumber: 1,
-            description: "C'est pas très loin d'Ada."
-        },
-        {
-            id:2,
-            questID: 1,
-            clueNumber: 2,
-            description: "On adore pique-niquer là-bas"
-        },
-        {
-            id:3,
-            questID: 2,
-            clueNumber: 1,
-            description: "La légende dit que ce lieu est hanté"
-        }
-    ]
+    // const clues = [
+    //     {
+    //         id:1,
+    //         questID: 1,
+    //         clueNumber: 1,
+    //         description: "C'est pas très loin d'Ada."
+    //     },
+    //     {
+    //         id:2,
+    //         questID: 1,
+    //         clueNumber: 2,
+    //         description: "On adore pique-niquer là-bas"
+    //     },
+    //     {
+    //         id:3,
+    //         questID: 2,
+    //         clueNumber: 1,
+    //         description: "La légende dit que ce lieu est hanté"
+    //     }
+    // ]
     const [isClueUnlocked, setIsClueUnlocked] = useState(false);
 
     const handleUnlockClue = () => {
@@ -39,7 +39,7 @@ const Clue = () => {
                     style={
                         isClueUnlocked ? styles.clueUnlocked : styles.clue
                     }>
-                    {isClueUnlocked ? clues[0].description : "Débloquer un indice"}
+                    {isClueUnlocked ? data : "Débloquer un indice"}
                 </Text>
             </TouchableOpacity>
         </View>
@@ -55,9 +55,9 @@ const styles = StyleSheet.create({
         color: "#EAB308",
     },
     clueUnlocked: {
-        fontSize: 20,
+        fontSize: 14,
         textAlign: "center",
-        padding: 10,
+        padding: 20,
         fontFamily: "Baskerville",
         color: "#EAB308",
     },
@@ -73,11 +73,12 @@ const styles = StyleSheet.create({
       marginVertical:20
     },
     desc: {
-      fontFamily: "Baskerville",
-      textAlign: "justify",
-      lineHeight: 24,
-      fontSize: 12,
-      color: "#EAB308",
+        fontFamily: "Baskerville",
+        textAlign: "justify",
+        fontSize: 14,
+        lineHeight:24,
+        color: "#EAB308",
+        padding:4,
     },
     image:{
         width: 300, 

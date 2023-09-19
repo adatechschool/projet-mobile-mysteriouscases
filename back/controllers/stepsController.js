@@ -17,9 +17,9 @@ exports.getSingleStep = (req, res) => {
 
   const sql = "SELECT * FROM steps WHERE quest = ? AND step_number = ?";
   const questId = req.params.questId;
-  const step = req.params.step
+  const stepNumber = req.params.stepNumber
 
-  connectDB.query(sql, [questId, step], (err, results) => {
+  connectDB.query(sql, [questId, stepNumber], (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
