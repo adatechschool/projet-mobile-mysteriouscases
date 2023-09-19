@@ -17,44 +17,77 @@ import WrongLocation from "../components/WrongLocation";
 
 const QuestStepPage = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    
-    const [ShowWrongLocation, setShowWrongLocation] = useState(false);
+  //Gestion de la mauvaise localisation
+  const [ShowWrongLocation, setShowWrongLocation] = useState(false);
+  const openWrongLocation = () => {
+    setShowWrongLocation(true);
+  };
+  const closeWrongLocation = () => {
+    setShowWrongLocation(false);
+  };
 
-    const openWrongLocation = () => {
-      setShowWrongLocation(true);
-    };
-    const closeWrongLocation = () => {
-      setShowWrongLocation(false);
-    };
+  const [step, setStep] = useState();
+  const {questId, stepNumber} = useParams()
 
 
-      return (
-        <SafeAreaView style={styles.container}>
-          <Navbar/>
-          <ScrollView>
 
-            <Text style={styles.title}>Etape x : nom de l'étape</Text>
-            <View style={{alignItems:"center"}}>
-                <Image
-                    source={{ uri: 'https://picsum.photos/300/300' }} // Remplacez l'URL par celle de l'image que vous souhaitez afficher
-                    style={styles.image} 
-                    />
-            </View>
-            <Clue/>
-            <Timer onWrongLocationPress={openWrongLocation}/>
-            {ShowWrongLocation && (
-              <View style={styles.overlay}>
-                <WrongLocation onClose={closeWrongLocation}/>
-              </View>
-            )}
-          </ScrollView>
-        </SafeAreaView>
-      );
+  //Récupération des données de l'étape de la quête grâce à la quesId et à la step dans l'URL
+  useEffect(() => {
+    fetch(`${process.env.EXPO_PUBLIC_API_URL}/steps/getSingleStep/${questId}/${stepNumber}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data[0])
+        setStep(data);})
+      .catch((error) => {
+        console.error("Erreur lors du chargement de l'étape", error);
+      });
+  }, [questId, stepNumber]);
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Navbar/>
+      <ScrollView>
+
+      {step ? (
+        <>
+          <Text style={styles.title}>Etape {step[0].step_number}</Text>
+          <View style={styles.blurryBackground}> 
+            <Text style={styles.desc}>   {step[0].step_text}</Text>
+          </View>
+          <View style={{alignItems:"center"}}>
+              <Image
+                  source={{ uri: step[0].step_image }} // Remplacez l'URL par celle de l'image que vous souhaitez afficher
+                  style={styles.image} 
+                  />
+          </View>
+          <Clue data={step[0].clue1} />
+          <Clue data={step[0].clue2} />
+          <Clue data={step[0].clue3} /> 
+          <Timer onWrongLocationPress={openWrongLocation}/>
+        </>
+      ):(
+        <Text style={styles.title}>Chargement en cours...</Text>
+
+      )}
+        
+        {ShowWrongLocation && (
+          <View style={styles.overlay}>
+            <WrongLocation onClose={closeWrongLocation}/>
+          </View>
+        )}
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
+    blurryBackground: {
+      backgroundColor: "rgba(0, 0, 0, 0.3)",
+      borderRadius: 25,
+      padding: 10,
+    },
     clue: {
         fontSize: 28,
         textAlign: "center",
@@ -76,15 +109,16 @@ const styles = StyleSheet.create({
     desc: {
       fontFamily: "Baskerville",
       textAlign: "justify",
-      lineHeight: 24,
-      fontSize: 12,
+      fontSize: 14,
+      lineHeight:24,
       color: "#EAB308",
+      padding:4,
     },
     image:{
         width: 300, 
-        height: 300,
-        resizeMode:'contain',
+        aspectRatio:1,
         borderRadius:20,
+        marginTop:20
     },
     title: {
       fontSize: 35,
