@@ -1,4 +1,4 @@
-import React, { useState }  from "react";
+import React, { useState, useEffect }  from "react";
 import {
   View,
   Image,
@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-native";
+import { useNavigate, useParams } from "react-router-native";
 import Timer from "../components/Timer";
 import Clue from "../components/Clue";
 import WrongLocation from "../components/WrongLocation";
