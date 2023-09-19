@@ -3,7 +3,7 @@ import {
   View,
   Image,
   Text,
-  FlatList,
+  Button,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -19,6 +19,8 @@ import SendLocation from "../components/SendLocation";
 const QuestStepPage = () => {
 
   const navigate = useNavigate();
+  const {questId, stepNumber} = useParams()
+  const [step, setStep] = useState();
 
   //Gestion de la mauvaise localisation
   const [ShowWrongLocation, setShowWrongLocation] = useState(false);
@@ -28,11 +30,6 @@ const QuestStepPage = () => {
   const closeWrongLocation = () => {
     setShowWrongLocation(false);
   };
-
-  const [step, setStep] = useState();
-  const {questId, stepNumber} = useParams()
-
-
 
   //Récupération des données de l'étape de la quête grâce à la quesId et à la step dans l'URL
   useEffect(() => {
