@@ -14,6 +14,7 @@ import { useNavigate, useParams } from "react-router-native";
 import Timer from "../components/Timer";
 import Clue from "../components/Clue";
 import WrongLocation from "../components/WrongLocation";
+import SendLocation from "../components/SendLocation";
 
 const QuestStepPage = () => {
 
@@ -49,7 +50,6 @@ const QuestStepPage = () => {
     <SafeAreaView style={styles.container}>
       <Navbar/>
       <ScrollView>
-
       {step ? (
         <>
           <Text style={styles.title}>Etape {step[0].step_number}</Text>
@@ -58,25 +58,27 @@ const QuestStepPage = () => {
           </View>
           <View style={{alignItems:"center"}}>
               <Image
-                  source={{ uri: step[0].step_image }} // Remplacez l'URL par celle de l'image que vous souhaitez afficher
-                  style={styles.image} 
-                  />
+                source={{ uri: step[0].step_image }} // Remplacez l'URL par celle de l'image que vous souhaitez afficher
+                style={styles.image} 
+              />
           </View>
           <Clue data={step[0].clue1} />
           <Clue data={step[0].clue2} />
           <Clue data={step[0].clue3} /> 
-          <Timer onWrongLocationPress={openWrongLocation}/>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Timer />
+            <SendLocation onWrongLocationPress={openWrongLocation}/>
+          </View>
         </>
       ):(
         <Text style={styles.title}>Chargement en cours...</Text>
-
       )}
         
-        {ShowWrongLocation && (
-          <View style={styles.overlay}>
-            <WrongLocation onClose={closeWrongLocation}/>
-          </View>
-        )}
+      {ShowWrongLocation && (
+        <View style={styles.overlay}>
+          <WrongLocation onClose={closeWrongLocation}/>
+        </View>
+      )}
       </ScrollView>
     </SafeAreaView>
   );
@@ -145,10 +147,9 @@ const styles = StyleSheet.create({
     },
     overlay: {
       position: "absolute",
-      top: 0,
       left: 0,
       right: 0,
-      bottom: 0,
+      bottom: 250,
       // backgroundColor: "rgba(0, 0, 0, 0.3)",
       justifyContent: "center",
       alignItems: "center",

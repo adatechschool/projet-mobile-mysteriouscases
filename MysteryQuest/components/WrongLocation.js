@@ -35,9 +35,8 @@ const styles = StyleSheet.create({
     },
     container:{
         backgroundColor: "#1E1B4B",
-        borderRadius: 25, // Appliquez la bordure au fond flou
-        padding: 20, // Ajoutez un espacement autour du fond flou
-        // margin: 20,
+        borderRadius: 25, 
+        padding: 20, 
         borderColor: "#eab308",
         borderWidth:1,
         flexDirection:"column"
@@ -45,28 +44,12 @@ const styles = StyleSheet.create({
     cross:{
         alignItems:"flex-end"
     },
-    input: {
-        height: 40,
-        borderWidth: 1,
-        borderColor: '#eab308',
-        borderRadius:15,
-        padding: 10,
-        marginBottom: 20,
-        backgroundColor:"white"
-    },
-    textContent:{
-        color: "#EAB308",
-        fontFamily: "Baskerville",
-        fontSize: 16,
-        textAlign: "left",
-        paddingVertical: 10,
-    },
     title: {
         color: "#EAB308",
         fontFamily: "Mystery",
         fontSize: 36,
         textAlign: "center",
-        paddingVertical: 20,
+        padding: 60,
       },
 
 })
