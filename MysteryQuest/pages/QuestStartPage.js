@@ -39,7 +39,7 @@ const QuestStartPage = () => {
             <View style={styles.blurryBackground}> 
                 <Text style={styles.desc}>    {quest ? quest[0].story : "Chargement en cours..."}</Text>
             </View>
-            <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage")}}>
+            <TouchableOpacity style={styles.button} onPress={() => {navigate(`/QuestStepPage/${quest[0].id}/0`)}}>
                 <Text style={styles.textButton}>Commencer la quête</Text>
             </TouchableOpacity>
           </ScrollView>
