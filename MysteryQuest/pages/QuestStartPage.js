@@ -30,21 +30,54 @@ const QuestStartPage = () => {
       });
   }, [id]);
 
-      return (
-        <SafeAreaView style={styles.container}>
-          <Navbar />
-          <ScrollView>
+  //Fonction pour poster la requête
+  const sendPostRequest = async () => {
 
-            <Text style={styles.title}>{quest ? quest[0].title : "Chargement en cours..."}</Text>
-            <View style={styles.blurryBackground}> 
-                <Text style={styles.desc}>    {quest ? quest[0].story : "Chargement en cours..."}</Text>
-            </View>
-            <TouchableOpacity style={styles.button} onPress={() => {navigate(`/QuestStepPage/${quest[0].id}/1`)}}>
-                <Text style={styles.textButton}>Commencer la quête</Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </SafeAreaView>
-      );
+    const data = {
+      user: 1, //à remplacer par l'utilisateur connecté quand on aura fait l'authentification
+      quest: 4, //à remplacer par questID
+      start: Date.now(),
+    }
+
+    try{
+      const response = await fetch (`${process.env.EXPO_PUBLIC_API_URL}/scores/postScore`, {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok){
+        console.log('Requête POST réussie')
+      } else {
+        console.error('Erreur lors de la requête POST')
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de la requête POST :', error);
+    }
+  }
+
+  //Gestion du bouton "Démarrer la quête"
+  const handlePress = () => {
+    sendPostRequest();
+    navigate(`/QuestStepPage/${quest[0].id}/1`);
+  };
+
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <Navbar />
+      <ScrollView>
+
+        <Text style={styles.title}>{quest ? quest[0].title : "Chargement en cours..."}</Text>
+        <View style={styles.blurryBackground}> 
+            <Text style={styles.desc}>    {quest ? quest[0].story : "Chargement en cours..."}</Text>
+        </View>
+        <TouchableOpacity style={styles.button} onPress={handlePress}>
+            <Text style={styles.textButton}>Commencer la quête</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </SafeAreaView>
+  );
 };
 
 const styles = StyleSheet.create({
