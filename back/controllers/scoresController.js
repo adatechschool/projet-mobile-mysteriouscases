@@ -29,7 +29,7 @@ exports.getQuestScores = (req, res) => {
 exports.postScore = (req, res) => {
   const user = req.body.user;
   const quest = req.body.quest;
-  const start = req.body.start; // Date.now() pour l'heure de début
+  const start = req.body.start;
 
   if (!user || !quest) {
     return res.status(400).json({ error: "Toutes les valeurs sont requises" });
@@ -39,14 +39,14 @@ exports.postScore = (req, res) => {
   connectDB.query(
     sql,
     [user, quest, start],
-    (err, results) => {
+    (err) => {
       if (err) {
         console.error(err);
         res.status(500).send({ error: err.message });
       } else {
-        res.send("Quête démarrée avec succès !");
+        res.send("ok ça roule");
       }
-    }
+    } 
   );
 };
 
