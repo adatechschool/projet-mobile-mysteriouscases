@@ -1,5 +1,4 @@
-const connectDB = require("../routes/db-config/db")
-
+const connectDB = require("../routes/db-config/db");
 
 //Afficher toutes les quêtes
 exports.getAllQuests = (req, res) => {
@@ -15,9 +14,10 @@ exports.getAllQuests = (req, res) => {
 
 //Afficher la quête sélectionnée en fonction de l'id
 exports.getSingleQuest = (req, res) => {
-  const id = req.params.id;
+  const questId = req.params.id;
   const sql = "SELECT * FROM quests WHERE id = ?";
-  connectDB.query(sql, [id] (err, results) => {
+
+  connectDB.query(sql, [questId], (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {

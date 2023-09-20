@@ -3,6 +3,19 @@ const [userLatitude, setUserLatitude] = useState(null);
 const [userLongitude, setUserLongitude] = useState(null);
 const [questLatitude, setQuestLatitude] = useState(null);
 const [questLongitude, setQuestLongitude] = useState(null);
+const user = {
+  latitude: 4448.950845,
+  longitude: 2.460539,
+};
+const goal = {
+  latitude: 48.95038,
+  longitude: 2.460308,
+};
+
+const thresholdGoal = 0.0002; //écart pour lequel on considère que c'est bon
+const thresholdNearGoal = 0.0005; //écart pour lequel on considère que c'est proche
+const thresholdBeyondGoal = 0.1; //écart pour lequel on considère que c'est trop loin
+
 function isLocationWithinThreshold(
   userLatitude,
   userLongitude,
@@ -16,36 +29,41 @@ function isLocationWithinThreshold(
   return latDifference <= threshold && lonDifference <= threshold;
 }
 
-const thresholdGoal = 0.0002;
-const thresholdNearGoal = 0.0005;
-const thresholdBeyondGoal = 0.1;
+const userLocation = {
+  latitude: 4448.950845,
+  longitude: 2.460539,
+};
+const goalLocation = {
+  latitude: 48.95038,
+  longitude: 2.460308,
+};
 
 if (
   isLocationWithinThreshold(
-    userLatitude,
-    userLongitude,
-    questLatitude,
-    questLongitude,
+    userLocation.latitude,
+    userLocation.longitude,
+    goalLocation.latitude,
+    goalLocation.longitude,
     thresholdGoal
   )
 ) {
   console.log("L'utilisateur a gagné !");
 } else if (
   isLocationWithinThreshold(
-    userLatitude,
-    userLongitude,
-    questLatitude,
-    questLongitude,
+    userLocation.latitude,
+    userLocation.longitude,
+    goalLocation.latitude,
+    goalLocation.longitude,
     thresholdNearGoal
   )
 ) {
   console.log("L'utilisateur est proche du but.");
 } else if (
   isLocationWithinThreshold(
-    userLatitude,
-    userLongitude,
-    questLatitude,
-    questLongitude,
+    userLocation.latitude,
+    userLocation.longitude,
+    goalLocation.latitude,
+    goalLocation.longitude,
     thresholdBeyondGoal
   )
 ) {

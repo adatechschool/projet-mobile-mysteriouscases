@@ -8,11 +8,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Navbar from "../components/Navbar";
-import { useNavigate } from "react-router-native";
+import { useNavigate, useLocation } from "react-router-native";
 
 const QuestSuccessPage = () => {
+  console.log("Je suis sur la quest success page" )
 
     const navigate = useNavigate();
+
+    // const location = useLocation();
+    // console.log(location)
+    // const {data} = location.state
 
     const [isFinalStep, setIsFinalStep] = useState(false);
 
@@ -36,7 +41,7 @@ const QuestSuccessPage = () => {
                   <Text style={styles.title}>Succès n°X</Text>
                   <Text style={styles.desc}> texte du succès </Text>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage")}}>
+                <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage/2/1")}}>
                   <Text style={styles.textButton}>Etape suivante</Text>
                 </TouchableOpacity>
               </>
