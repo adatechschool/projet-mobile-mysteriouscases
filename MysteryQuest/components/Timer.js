@@ -4,8 +4,47 @@ import { Svg, G, Path } from "react-native-svg";
 
 const Timer = () => {
 
-  const [startTime, setStartTime] = useState(Date.now());
+  const [startTime, setStartTime] = useState(null);
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [questStart, setQuestStart] = useState(null);
+
+  useEffect(() => {
+    const startTime = Date.now()
+    setQuestStart(startTime)
+    console.log("startTime", startTime)
+  }, [])
+  // console.log("questStart", questStart)
+
+
+  //Fonction pour poster la requête
+  const sendPostRequest = async () => {
+
+    const data = {
+      user: 1, //à remplacer par l'utilisateur connecté quand on aura fait l'authentification
+      quest: 4, //à remplacer par questID
+      start: questStart,
+    }
+
+    try{
+      const response = await fetch (`${process.env.EXPO_PUBLIC_API_URL}/scores/postScore`, {
+        method:'POST',
+        headers:{'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      })
+
+      if (response.ok){
+        console.log('Requête POST réussie')
+      } else {
+        console.error('Erreur lors de la requête POST')
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi de la requête POST :', error);
+    }
+  }
+  sendPostRequest()
+
+
+
 
   // Mettre à jour le chronomètre chaque seconde
   useEffect(() => {
