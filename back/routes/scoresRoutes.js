@@ -5,5 +5,6 @@ const scoresController = require("../controllers/scoresController");
 router.get("/getAllScores", scoresController.getAllScores);
 router.get("/getQuestScores", scoresController.getQuestScores);
 router.post("/postScore", scoresController.postScore);
+router.put("/updateScore", scoresController.postScore);
 
 module.exports = router;
