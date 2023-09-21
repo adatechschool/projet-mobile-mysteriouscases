@@ -13,95 +13,54 @@ import ModalDropdown from 'react-native-modal-dropdown';
 
 const RankingPage = () => {
 
-    //BDD des joueurs et de leurs scores
-    //Probablement plus pertinent de créer une table score et de mettre "questID | username |score" plutôt que de faire une table par joueur
-    const players = [
-        {
-            Username: "Camilledu91",
-            score1: "00:30:25",
-            score2: "01:10:51",
-            score3: "02:01:13"
-        },
-        {
-            Username: "TiteSayaaa",
-            score1: "00:59:18",
-            score2: "00:48:23",
-            score3: "02:19:49"
-        },
-        {
-            Username: "AlanBGluv",
-            score1: "01:13:00",
-            score2: "01:01:18",
-            score3: "00:54:20"
+
+  const [scores, setScores] = useState([])
+  const [selectedQuestId, setSelectedQuestId] = useState(null);
+
+  //Récupérer les scores en fonction de l'ID de la quête
+  useEffect(() => {
+    const fetchScores = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.EXPO_PUBLIC_API_URL}/scores/getAllScores`
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setScores(data);
+        } else {
+          console.error('Erreur lors de la requête GET des scores');
         }
-    ];
-
-    //BDD des quêtes
-    const quests = [
-        {
-            title: "La Malette à Mamie",
-            id:1,
-            desc: "Explorez le quartier, résolvez des énigmes et découvrez les souvenirs cachés pour retrouver la malette perdue de Mamie.",
-        },
-        {
-            title: "Où est Camille ?",
-            id:2,
-            desc: "Camille, la petite fille que tu devais garder a disparu. Retrouve-la rapidement avant que ses mamans rentrent du travail !",
-        },
-        {
-            title: "Les Ailes d'Élara",
-            id:3,
-            desc: "Découvrez les mystères de Paris en aidant la fée Élara à retrouver des fragments magiques et à sauver l'équilibre entre les mondes.",
-        },
-
-    ];
-
-
-    
-    
-    // Fonction pour trier les joueurs en fonction d'un score donné (plus besoin quand on fera une requête SQL)
-    const sortPlayersByScore = (scoreKey) => {
-        return players.slice().sort((a, b) => {
-            const scoreA = a[scoreKey];
-            const scoreB = b[scoreKey];
-            return compareTimes(scoreA, scoreB);
-        });
+      } catch (error) {
+        console.error('Erreur lors de l\'envoi de la requête GET des scores :', error);
+      }
     };
-    // Fonction pour comparer deux temps (au format hh:mm:ss)
-    const compareTimes = (timeA, timeB) => {
-        // Convertir les temps en secondes pour la comparaison
-        const secondsA = convertToSeconds(timeA);
-        const secondsB = convertToSeconds(timeB);
-        return secondsA - secondsB;
-    };
-    // Fonction pour convertir un temps (au format hh:mm:ss) en secondes
-    const convertToSeconds = (time) => {
-        const [hours, minutes, seconds] = time.split(':').map(Number);
-        return hours * 3600 + minutes * 60 + seconds;
-    };
+
+    fetchScores();
+  }, []);
+
+
+  //Fonction pour filtrer les scores par quêtes
+  const filterScoresByQuest = () => {
+    return scores.filter((score) => score.quest === selectedQuestId);
+  };
+
+  //Fonction pour convertir score.timeInSeconds au format hh:mm:ss
+  function convertTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+    
+    const pad = (value) => (value < 10 ? `0${value}` : `${value}`);
+    
+    return `${pad(hours)}:${pad(minutes)}:${pad(remainingSeconds)}`;
+  }
     
     
-    // État pour suivre la quête actuellement sélectionnée
-    const [selectedQuestId, setSelectedQuestId] = useState(null);
     // Fonction pour changer la quête actuellement sélectionnée
-    const handleQuestChange = (index) => {
-        setSelectedQuestId(quests[index].id);
+    const handleQuestChange = (questId) => {
+        setSelectedQuestId(questId);
     };
-
-    
-
-    // Sélectionnez le tableau à afficher en fonction de la quête sélectionnée
-    let rankingTable = [];
-    if (selectedQuestId === 1) {
-        rankingTable = sortPlayersByScore('score1');
-    } else if (selectedQuestId === 2) {
-        rankingTable = sortPlayersByScore('score2');
-    } else if (selectedQuestId === 3) {
-        rankingTable = sortPlayersByScore('score3');
-    }
-
-
-
 
 
 
@@ -110,9 +69,9 @@ const RankingPage = () => {
         <Navbar />
         <Text style={styles.title}>Classement des joueurs :</Text>
         <ModalDropdown 
-            options={quests.map((quest) => quest.title)}
+            options={scores.map((score) => score.quest)}
             defaultValue="Sélectionne une quête ▼"
-            onSelect={(index) => handleQuestChange(index)}
+            onSelect={(option) => handleQuestChange(option.quest)}
             textStyle={{color:"#eab308", fontSize: 16, fontFamily:"Baskerville"}}
             dropdownStyle={{backgroundColor:'#1e1b4b', borderColor: '#eab308'}}
             dropdownTextStyle={{backgroundColor:'#1e1b4b',color:"#eab308", fontFamily:"Baskerville", fontSize:12}}
@@ -129,27 +88,19 @@ const RankingPage = () => {
                 <Text style={styles.tableContent}>Score</Text>
             </View>
             <FlatList
-                data={rankingTable}
+                data={scores}
                 keyExtractor={(item, index) => index.toString()}
                 renderItem={({ item, index }) => (
                     <View style={styles.tableContent}>
                     <Text style={styles.tableContent}>{index + 1}</Text>
-                    <Text style={styles.tableContent}>{item.Username}</Text>
-                    <Text style={styles.tableContent}>{item[`score${selectedQuestId}`]}</Text>
+                    <Text style={styles.tableContent}>{item.user}</Text>
+                    <Text style={styles.tableContent}>{convertTime(item.timeInSeconds)}</Text>
                 </View>
                 )}
                 />
         </View>
-        <Text style={[styles.title, {fontSize:24}]}>mon classement : 1/3</Text>
-
-    
-
+        <Text style={[styles.title, {fontSize:24}]}>mon classement :</Text>
     </SafeAreaView>
-  );
-  return (
-    <View>
-      <Navbar />
-    </View>
   );
 };
 
