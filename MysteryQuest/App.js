@@ -55,7 +55,7 @@ export default function App() {
           <Route path="/QuestRewardingPage" element={<QuestRewardingPage/>} />
           <Route path="/QuestStartPage/:id" element={<QuestStartPage/>} />
           <Route path="/QuestStepPage/:questId/:stepNumber" element={<QuestStepPage/>} />
-          <Route path="/QuestSuccessPage/:questId/:stepNumber" element={<QuestSuccessPage/>} />
+          <Route path="/QuestSuccessPage" element={<QuestSuccessPage/>} />
           <Route path="/RankingPage" element={<RankingPage/>} />
           <Route path="/RulesPage" element={<RulesPage/>} />
           <Route path="/TrophyPage" element={<TrophyPage/>} />

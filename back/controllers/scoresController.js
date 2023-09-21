@@ -8,8 +8,8 @@ exports.getAllScores = (req, res) => {
     quests.title AS quest,
     (TIMESTAMPDIFF(SECOND, FROM_UNIXTIME(scores.start / 1000), FROM_UNIXTIME(scores.finish / 1000))) AS timeInSeconds
   FROM scores
-  INNER JOIN users ON scores.user_id = users.id
-  INNER JOIN quests ON scores.quest_id = quests.id 
+  INNER JOIN users ON scores.user = users.id
+  INNER JOIN quests ON scores.quest = quests.id 
   ORDER BY timeInSeconds ASC
   `;
   connectDB.query(sql, (err, results) => {
@@ -100,12 +100,12 @@ exports.updateScore = (req, res) => {
   connectDB.query(
     sql,
     [finish, user, quest],
-    (err, res) => {
+    (err, result) => {
       if (err) {
         console.error(err);
-        res.status(500).send({ error: err.message });
+        res.status(500).send({ error: /*err.message*/ 'ça marche pas' });
       } else {
-        res.send("Quête terminée avec succès !");
+        res.send("Quête terminée avec succès, retrouvez le score sur la page ranking !");
       }
     }
   );
