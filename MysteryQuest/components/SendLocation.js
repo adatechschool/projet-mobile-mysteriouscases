@@ -9,6 +9,35 @@ const SendLocation = ({onWrongLocationPress, data}) => {
     const [userLocation, setUserLocation] = useState(null);
     const [rightLocation, setRightLocation] = useState(false);
 
+    //Envoie le finish dans la BDD
+    const sendPutRequest = async () => {
+        const data = {
+          user: 1, // à remplacer par l'utilisateur connecté quand l'authentification sera mise en place
+          quest: 4, // à remplacer par questID
+          finish: Date.now(),
+        };
+
+        try {
+          const response = await fetch(
+            `${process.env.EXPO_PUBLIC_API_URL}/scores/updateScore`,
+            {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(data),
+            }
+          );
+      
+          if (response.ok) {
+            console.log("Requête PUT réussie");
+          } else {
+            console.error("Erreur lors de la requête PUT");
+          }
+        } catch (error) {
+          console.error("Erreur lors de l'envoi de la requête PUT :", error);
+        }
+    };
+
+
     //Récupération de la localisation de l'utilisateur
     const getUserLocation = async () => {
         try {
@@ -29,7 +58,7 @@ const SendLocation = ({onWrongLocationPress, data}) => {
         }
     };
 
-    //Compare la localisation de l'utilisateur et celle de la quette
+    //Compare la localisation de l'utilisateur et celle de la quête
     const compareLocations = (userLat, userLon, goalLat, goalLon) => {
         const latDifference = Math.abs(userLat - goalLat);
         const lonDifference = Math.abs(userLon - goalLon);
@@ -54,9 +83,14 @@ const SendLocation = ({onWrongLocationPress, data}) => {
 
             const isLocationCorrect = compareLocations(userLocation.coords.latitude, userLocation.coords.longitude, data.lattitude, data.longitude);
 
-            if (isLocationCorrect) {
+            if (isLocationCorrect && data.step_number == 2) {
                 setRightLocation(true);
-                navigate(`/QuestSuccessPage/${data.quest}/${data.step_number}`)
+                navigate(`/QuestSuccessPage`)
+                sendPutRequest()
+            }
+            else if (isLocationCorrect){
+                setRightLocation(true);
+                navigate("/QuestStepPage/4/2")
             }
             else {
                 onWrongLocationPress();

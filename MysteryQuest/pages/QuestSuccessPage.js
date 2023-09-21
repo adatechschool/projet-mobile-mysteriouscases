@@ -19,7 +19,7 @@ const QuestSuccessPage = () => {
     // console.log(location)
     // const {data} = location.state
 
-    const [isFinalStep, setIsFinalStep] = useState(false);
+    const [isFinalStep, setIsFinalStep] = useState(true);
 
 
       return (
@@ -41,7 +41,7 @@ const QuestSuccessPage = () => {
                   <Text style={styles.title}>Succès n°X</Text>
                   <Text style={styles.desc}> texte du succès </Text>
                 </View>
-                <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage/2/1")}}>
+                <TouchableOpacity style={styles.button} onPress={() => {navigate("/QuestStepPage/4/2")}}>
                   <Text style={styles.textButton}>Etape suivante</Text>
                 </TouchableOpacity>
               </>

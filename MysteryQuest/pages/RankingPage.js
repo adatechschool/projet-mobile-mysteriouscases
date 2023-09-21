@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import Navbar from "../components/Navbar";
 import ModalDropdown from 'react-native-modal-dropdown';
@@ -16,6 +17,19 @@ const RankingPage = () => {
 
   const [scores, setScores] = useState([])
   const [selectedQuestId, setSelectedQuestId] = useState(null);
+  const [quests, setQuests] = useState([])
+ 
+  //Récupération de toutes les quêtes
+  useEffect(() => {
+    fetch(`${process.env.EXPO_PUBLIC_API_URL}/quests/getAllQuests`)
+      .then((response) => response.json())
+      .then((data) => {
+        setQuests(data) ;
+      })
+      .catch((error) => {
+        console.error("Erreur lors de la récupération des quêtes", error);
+      });
+  }, []);
 
   //Récupérer les scores en fonction de l'ID de la quête
   useEffect(() => {
@@ -58,8 +72,8 @@ const RankingPage = () => {
     
     
     // Fonction pour changer la quête actuellement sélectionnée
-    const handleQuestChange = (questId) => {
-        setSelectedQuestId(questId);
+    const handleQuestChange = (index) => {
+        setQuests(quests[index].title);
     };
 
 
@@ -68,10 +82,11 @@ const RankingPage = () => {
     <SafeAreaView style={styles.container}>
         <Navbar />
         <Text style={styles.title}>Classement des joueurs :</Text>
+        <ScrollView>
         <ModalDropdown 
-            options={scores.map((score) => score.quest)}
+            options={quests.map((quest) => quest.title)}
             defaultValue="Sélectionne une quête ▼"
-            onSelect={(option) => handleQuestChange(option.quest)}
+            onSelect={(index, quest) => handleQuestChange(quests[index])}
             textStyle={{color:"#eab308", fontSize: 16, fontFamily:"Baskerville"}}
             dropdownStyle={{backgroundColor:'#1e1b4b', borderColor: '#eab308'}}
             dropdownTextStyle={{backgroundColor:'#1e1b4b',color:"#eab308", fontFamily:"Baskerville", fontSize:12}}
@@ -100,6 +115,7 @@ const RankingPage = () => {
                 />
         </View>
         <Text style={[styles.title, {fontSize:24}]}>mon classement :</Text>
+        </ScrollView>
     </SafeAreaView>
   );
 };
