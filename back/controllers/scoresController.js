@@ -2,7 +2,16 @@ const connectDB = require("../routes/db-config/db")
 
 //Afficher tous les scores
 exports.getAllScores = (req, res) => {
-  const sql = "SELECT * FROM scores";
+  const sql = `SELECT
+    scores.id AS scoreId,
+    users.username AS user,
+    quests.title AS quest,
+    (TIMESTAMPDIFF(SECOND, FROM_UNIXTIME(scores.start / 1000), FROM_UNIXTIME(scores.finish / 1000))) AS timeInSeconds
+  FROM scores
+  INNER JOIN users ON scores.user_id = users.id
+  INNER JOIN quests ON scores.quest_id = quests.id 
+  ORDER BY timeInSeconds ASC
+  `;
   connectDB.query(sql, (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
@@ -18,6 +27,32 @@ exports.getQuestScores = (req, res) => {
   connectDB.query(sql, (err, results) => {
     if (err) {
       res.status(500).json({ error: err.message });
+    } else {
+      res.json(results);
+    }
+  });
+};
+
+//Afficher tous les scores d'une quête (V2)
+exports.getScoresByQuest = (req, res) => {
+  const sql = `
+  SELECT 
+    scores.id AS scoreId,
+    users.username AS username,
+    quests.name AS questName,
+    (TIMESTAMPDIFF(SECOND, FROM_UNIXTIME(scores.start / 1000), FROM_UNIXTIME(scores.finish / 1000))) AS timeInSeconds
+  FROM scores
+  INNER JOIN users ON scores.user_id = users.id
+  INNER JOIN quests ON scores.quest_id = quests.id
+  WHERE scores.quest_id = ?
+`;
+
+  const questId = req.params.questId; // Récupérez l'ID de la quête depuis les paramètres de l'URL
+
+  connectDB.query(sql, [questId], (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send({ error: err.message });
     } else {
       res.json(results);
     }
@@ -54,7 +89,7 @@ exports.postScore = (req, res) => {
 exports.updateScore = (req, res) => {
   const user = req.body.user;
   const quest = req.body.quest;
-  const finish = Date.now(); // Date.now() pour l'heure de fin
+  const finish = req.body.finish; // Date.now() pour l'heure de fin
 
   if (!user || !quest) {
     return res.status(400).json({ error: "Toutes les valeurs sont requises"  });
