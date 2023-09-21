@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: mysteryquest
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.1.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,7 +45,7 @@ CREATE TABLE `steps` (
 
 LOCK TABLES `steps` WRITE;
 /*!40000 ALTER TABLE `steps` DISABLE KEYS */;
-INSERT INTO `steps` VALUES (1,2,1,'Le crépuscule enveloppe la ville vers 19h30 lorsque vous recevez un mystérieux message de la gothique. Il vous guide vers un lieu où les ombres s\'étirent et où les esprits murmurent, un lieu où les âmes tourmentées trouvent leur repos éternel. Vous devez suivre ces mots énigmatiques pour découvrir la première étape de cette quête ténébreuse.','https://www.pariszigzag.fr/wp-content/uploads/2017/05/falls-1338730_1920.jpg',48.861800,2.398000,'ce n\'est pas chez la mère lefauteuil','Le seul moyen de se délibrer d\'une tentation, c\'est d\'y céder','Allez voir du côté de l\'avenue Carette'),(2,4,1,'Votre quête commence à la cafétéria, une fois pris votre café/thé/chocolat olé, c\'est l\'heure de partir à la recherche du document caché. Trouvez son emplacement pour récupérer une information capitale pour la suite de votre mission.','none',48.873900,2.358800,'Il y en a des micro-ondes ici !','Des boites roses... intéressant.','Regarde bien les boites.'),(3,4,2,'Maintenant que vous avez trouvé ce premier morceau, trouver le deuxième endroit où est caché l\'autre partie du document.','none',48.875000,2.358800,'Une salle de cours ?','Il doit être caché dans un emplacement discret.','Hum... cette plante a besoin d\'être arosé !');
+INSERT INTO `steps` VALUES (1,2,1,'Le crépuscule enveloppe la ville vers 19h30 lorsque vous recevez un mystérieux message de la gothique. Il vous guide vers un lieu où les ombres s\'étirent et où les esprits murmurent, un lieu où les âmes tourmentées trouvent leur repos éternel. Vous devez suivre ces mots énigmatiques pour découvrir la première étape de cette quête ténébreuse.','https://www.pariszigzag.fr/wp-content/uploads/2017/05/falls-1338730_1920.jpg',48.861800,2.398000,'ce n\'est pas chez la mère lefauteuil','Le seul moyen de se délibrer d\'une tentation, c\'est d\'y céder','Allez voir du côté de l\'avenue Carette'),(2,4,1,'Votre quête commence à la cafétéria, une fois pris votre café/thé/chocolat olé, c\'est l\'heure de partir à la recherche du document caché. Trouvez son emplacement pour récupérer une information capitale pour la suite de votre mission.','https://media.licdn.com/dms/image/D4E22AQHbgok--14ipQ/feedshare-shrink_1280/0/1695229262876?e=1698278400&v=beta&t=i14mSgZTgAldszSiKGJCtSMkUtN3DJv5gAjpRpwpscU',48.873900,2.358800,'Il y en a des micro-ondes ici !','Des boites roses... intéressant.','Regarde bien les boites.'),(3,4,2,'Maintenant que vous avez trouvé ce premier morceau, trouver le deuxième endroit où est caché l\'autre partie du document.','https://media.licdn.com/dms/image/C4E22AQFlxAfqo7jC5g/feedshare-shrink_2048_1536/0/1675182096507?e=1698278400&v=beta&t=SmUgiX0RL2qLgkTAu6n_fBqYsITE91hpf13a2Bw0GmY',48.873900,2.358800,'Une salle de cours ?','Il doit être caché dans un emplacement discret.','Hum... cette plante a besoin d\'être arosé !');
 /*!40000 ALTER TABLE `steps` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-19 16:02:39
+-- Dump completed on 2023-09-21 15:19:28
