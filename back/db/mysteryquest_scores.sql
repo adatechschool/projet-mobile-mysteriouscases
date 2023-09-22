@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: mysteryquest
 -- ------------------------------------------------------
--- Server version	8.0.34
+-- Server version	8.1.0
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,14 +26,14 @@ CREATE TABLE `scores` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user` int DEFAULT NULL,
   `quest` int DEFAULT NULL,
-  `start` datetime DEFAULT NULL,
-  `finish` datetime DEFAULT NULL,
+  `start` bigint DEFAULT NULL,
+  `finish` bigint DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `quest_id` (`quest`),
   KEY `user_id` (`user`),
   CONSTRAINT `quest_id` FOREIGN KEY (`quest`) REFERENCES `quests` (`id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -42,7 +42,6 @@ CREATE TABLE `scores` (
 
 LOCK TABLES `scores` WRITE;
 /*!40000 ALTER TABLE `scores` DISABLE KEYS */;
-INSERT INTO `scores` VALUES (2,7,3,NULL,NULL),(3,6,3,NULL,NULL),(4,37,3,NULL,NULL),(5,18,3,NULL,NULL),(6,37,2,NULL,NULL),(7,19,1,NULL,NULL),(8,5,3,NULL,NULL),(9,16,1,NULL,NULL),(10,29,1,NULL,NULL),(11,37,2,NULL,NULL),(12,27,1,NULL,NULL),(13,4,1,NULL,NULL),(14,3,1,NULL,NULL),(15,22,2,NULL,NULL),(16,33,1,NULL,NULL),(17,5,3,NULL,NULL),(18,37,1,NULL,NULL),(19,34,3,NULL,NULL),(20,9,2,NULL,NULL),(21,5,2,NULL,NULL);
 /*!40000 ALTER TABLE `scores` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-09-20 17:24:10
+-- Dump completed on 2023-09-21 15:19:28
